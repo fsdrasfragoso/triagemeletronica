@@ -41,12 +41,15 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
     }
     
    public void adicionar_usuario(Medico medico) throws Exception{
-        String sql = "insert into Usuarios(nome,login,senha,perfil) values (?,?,?,?)";
-        Validar validar = new Validar();
+        
+       String sql = "insert into Usuarios(nome,login,senha,perfil) values (?,?,?,?)";
+        
+       Validar validar = new Validar();
         boolean nomeValido = validar.checkName(medico.getNome());
         boolean crmValido = validar.checkCRM(medico.getCrm());
         boolean camposNulos = validar.camposNulosMed(medico);
         boolean senhaValida = validar.checkSenha(medico.getSenha());
+        boolean perfil = validar.checkPerfilMed(medico.getPerfil());
         
         try {
             pst = conexao.prepareStatement(sql);
@@ -55,17 +58,17 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             pst.setString(3, medico.getSenha());
             pst.setString(4, medico.getPerfil());
 
-            if (nomeValido == false && crmValido == false && camposNulos == true && senhaValida == true) {
+            if (nomeValido == false && crmValido == false && camposNulos == true && senhaValida == true && perfil == true) {
                 int add = pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Dados de usuário do médico cadastrados com sucesso!");
+                //JOptionPane.showMessageDialog(null, "Dados de usuário do médico cadastrados com sucesso!");
             } else {
-                throw new Exception("Dados de usuário do médico inválidos!");
+                throw new Exception();
             }
 
         } catch (SQLException | HeadlessException e) {
             JOptionPane.showMessageDialog(null, e);
         }catch (Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+            //JOptionPane.showMessageDialog(null, ex);
             throw ex;
         }
     }
@@ -156,18 +159,18 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
                 
             if(nulos == true && fone_fixo10Digitos == true && celular11Digitos == true){
                 pst2.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Dados de endereço e telefone do médico cadastrados com sucesso!"); 
+                //JOptionPane.showMessageDialog(null, "Dados de endereço e telefone do médico cadastrados com sucesso!"); 
             
             }else{
                 deletando_usuario();
-                throw new Exception("Dados de endereço do médico inválidos. Médico excluido!");
+                throw new Exception();
             }
             
 
         } catch (SQLException | HeadlessException e) {
             JOptionPane.showMessageDialog(null, e);
         }catch (Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+            //JOptionPane.showMessageDialog(null, ex);
             throw ex;
         }
         

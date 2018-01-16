@@ -43,7 +43,7 @@ public class TesteAlterar {
         try {
             alterar.alterar_dados_Enfermeiro(enfermeiro);
         } catch (Exception ex) {
-            Logger.getLogger(TesteCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TesteCadastroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         String nomeEnf = "Francisco Sousa";

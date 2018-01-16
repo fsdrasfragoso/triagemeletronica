@@ -59,14 +59,14 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
 
                 if(nulos == true && nomeValido == false && perfilValido == true && senhaValida == true && corenValido == false){
                     int add = pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Dados de usuário do enfermeiro cadastrados com sucesso!");
+                    //JOptionPane.showMessageDialog(null, "Dados de usuário do enfermeiro cadastrados com sucesso!");
                 }else{
-                    throw new Exception("Dados de usuário do enfermeiro inválidos");
+                    throw new Exception();
                 }    
             } catch (SQLException | HeadlessException e) {
                 JOptionPane.showMessageDialog(null, e);
             } catch (Exception ex){
-                JOptionPane.showMessageDialog(null, ex);
+                //JOptionPane.showMessageDialog(null, ex);
                 throw ex;
             }
     }
@@ -156,11 +156,11 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
             
                 if(nulos == true && fone10Digitos == true && celular11Digitos == true){
                     pst2.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Dados de endereço e telefone do enfermeiro cadastrados com sucesso!"); 
+                    //JOptionPane.showMessageDialog(null, "Dados de endereço e telefone do enfermeiro cadastrados com sucesso!"); 
             
                 }else{
                     deletando_usuario();
-                    throw new Exception("Dados de endereço e telefone do enfermeiro inválidos. Enfermeiro excluido!");
+                    throw new Exception();
                 }
             
             
@@ -168,7 +168,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
             } catch (SQLException | HeadlessException e) {
                 JOptionPane.showMessageDialog(null, e);
             }catch (Exception ex){
-                JOptionPane.showMessageDialog(null, ex);
+                //JOptionPane.showMessageDialog(null, ex);
                 throw ex;
             }
     
