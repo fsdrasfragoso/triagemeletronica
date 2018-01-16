@@ -240,7 +240,7 @@ public Triagem() {
             }
         }else{
             try {
-                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), proce((String)jComboBoxProcedencia.getSelectedItem()), jTextPaneMotivoDaVinda.getText(), jTextNumeroCartaoSUS.getText());
+                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), proce((String)jComboBoxProcedencia.getSelectedItem()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -248,7 +248,7 @@ public Triagem() {
         }
         }else{
             try {
-                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), jTextFieldProcedencia.getText(), motivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText());
+                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), motivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1255,6 +1255,77 @@ public String motivo(String nome) throws SQLException{
     
     
 }
+
+public String cadMotivo(String nome) throws SQLException{
+    String sql = "INSERT INTO `motivo_da_vinda` (`Id`, `motivo_da_vinda`) VALUES (NULL, '"+nome+"');";
+    Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       stmt.execute();
+       stmt.close();
+       
+    return idMotivo(nome); 
+}
+
+
+public String cadProce(String nome) throws SQLException{
+    String sql = "INSERT INTO `procedencia` (`id`, `Procedencia`) VALUES (NULL, '"+nome+"');";
+    Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       stmt.execute();
+       stmt.close();
+       
+    return idProce(nome); 
+}
+
+public String idProce(String nome) throws SQLException{
+    String sql = "SELECT id FROM `procedencia` WHERE Procedencia='"+nome+"';";
+    
+     Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("id");
+                i++;
+
+        }
+        
+        return r;
+    
+    
+}
+
+
+
+
+
+public String idMotivo(String nome) throws SQLException{
+    String sql = "SELECT Id FROM `motivo_da_vinda` WHERE motivo_da_vinda='"+nome+"';";
+    
+     Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("id");
+                i++;
+
+        }
+        
+        return r;
+    
+    
+}
+
+
 
 public String proce(String nome) throws SQLException{
   String sql = "SELECT id FROM `procedencia` WHERE Procedencia='"+nome+"';";
