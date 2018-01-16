@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import org.jdesktop.beansbinding.BindingGroup;
 import triagemeletronica.conexao.Conexao;
 
@@ -70,7 +71,7 @@ public class Triagem  extends JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFBairro;
     private javax.swing.JTextField jTFCEP;
-    private javax.swing.JTextField jTFNome;
+    public javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFQual;
     private javax.swing.JTextField jTFRG;
     private javax.swing.JTextField jTextField4;
@@ -102,6 +103,8 @@ public class Triagem  extends JFrame{
     private javax.swing.JLabel jLabelSexo;
     private javax.swing.JTextArea jTextAreaMedicamento;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLPESO;
+    private javax.swing.JTextField jTPESO;
     
     private boolean tria; 
 
@@ -197,7 +200,8 @@ public Triagem() {
         jLabelMedicamento = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextAreaMedicamento = new javax.swing.JTextArea();
-
+         jLPESO = new javax.swing.JLabel();
+        jTPESO = new javax.swing.JTextField();
         
         
         
@@ -220,9 +224,62 @@ public Triagem() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(getTria()){
-                    System.err.println("adiciona");
-                }else{
+                   // System.err.println("adiciona");
+        
+          setTria(false);          
+        
+        if(!jTextNumeroCartaoSUS.getText().trim().equals("")){  
+        if(jTextFieldProcedencia.getText().trim().equals("") ) {
+        if(jTextPaneMotivoDaVinda.getText().trim().equals("")){
+                     
+        
+            try {
+                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), proce((String)jComboBoxProcedencia.getSelectedItem()), motivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), proce((String)jComboBoxProcedencia.getSelectedItem()), jTextPaneMotivoDaVinda.getText(), jTextNumeroCartaoSUS.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+  
+        }
+        }else{
+            try {
+                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), jTextFieldProcedencia.getText(), motivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Informe o Numero do Cartão do SUS");
+        }
+        }else{
                     System.out.println("Cadastrar");
+        jTFNome.setText("");
+        jTFCEP.setText("");
+        jTFRG.setText("");
+        
+        jTextFieldNumero.setText("");
+        
+        jTextAreaMedicamento.setText("");
+        jTextFieldVomitou.setText("");
+        jTFQual.setText("");
+        jTextFieldRua.setText("");
+        jTFBairro.setText("");
+        jTextField4.setText("");
+        jTextFieldRua.setText("");
+        jTextFieldAltura.setText("");
+        jTextFieldDefecou.setText("");
+        jTextFieldProcedencia.setText("");
+        jTextPaneMotivoDaVinda.setText("");
+        
+        
+                
+        
                 }
                 
              }
@@ -251,7 +308,7 @@ public Triagem() {
                 setTria(true);
                 
         jComboBoxSEXO.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboBoxSEXO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSEXO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMININO" }));
 
         jLabelMedicacao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelMedicacao.setText("O Paciente  esta tomando alguma medicação: ");
@@ -276,7 +333,8 @@ public Triagem() {
         jLBairro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLBairro.setText("Bairro");
 
-       
+        jLPESO.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLPESO.setText("Informe o Peso do Paciente");
 
         jLCEP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLCEP.setText("CEP:");
@@ -385,7 +443,8 @@ public Triagem() {
         jTFNome.setText(rs.getString("nome"));
         jTFCEP.setText(rs.getString("cep"));
         jTFRG.setText(rs.getString("rg"));
-        
+        jTPESO.setText(rs.getString("Peso"));
+        jTextFieldAltura.setText(rs.getString("Altura"));
         jTextFieldNumero.setText(rs.getString("numero"));
         
         jTextFieldRua.setText(Rua_has_bairro(rs.getString("rua_has_bairro_id"), 1));
@@ -427,7 +486,8 @@ public Triagem() {
 
         jCheckBoxTrauma.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jCheckBoxTrauma.setText("SIM");
-                                
+        jLabelSexo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelSexo.setText("Sexo:");         
         
         
             stmt.close();
@@ -437,7 +497,199 @@ public Triagem() {
                 setTria(false);
              jButtonTriagem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
              jButtonTriagem.setText("Realizar Triagem");    
-                
+        jComboBoxSEXO.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxSEXO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMININO" }));
+
+        jLabelMedicacao.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelMedicacao.setText("O Paciente  esta tomando alguma medicação: ");
+
+        jCheckBoxMedicamento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxMedicamento.setText("SIM");
+
+        jLabelMedicamento.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelMedicamento.setText("Caso a Resposta seja sim, informa quais abaixo:");
+
+        jTextAreaMedicamento.setColumns(20);
+        jTextAreaMedicamento.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaMedicamento);
+
+        
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Nome:");
+
+        jLEndereco.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLEndereco.setText("Rua:");
+
+        jLBairro.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLBairro.setText("Bairro");
+
+        jLPESO.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLPESO.setText("Informe o Peso do Paciente");
+        
+        
+
+        jLCEP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLCEP.setText("CEP:");
+
+        jlEstado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jlEstado.setText("Estado");
+
+       
+        jLCidade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLCidade.setText("Cidade");
+
+
+        jLRG.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLRG.setText("RG");
+
+      
+        jLZona.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLZona.setText("Zona:");
+
+        jComboBoxZona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxZona.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "URBANA", "RURAL" }));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("O paciente tem diabetes:");
+
+        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton1.setText("SIM");
+
+        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jRadioButton2.setText("NÂO");
+        
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Alergia a algum medicamento?");
+
+        jCheckBoxAlergia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBoxAlergia.setText("SIM");
+
+        jLQual.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLQual.setText("Qual:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel4.setText("Procedencia:");
+
+        jTextFieldProcedencia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jComboBoxProcedencia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxProcedencia.setModel(new javax.swing.DefaultComboBoxModel<>(Procedencia()));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("Motivo da Vinda:");
+
+        jComboBoxMotivoDaVienda.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxMotivoDaVienda.setModel(new javax.swing.DefaultComboBoxModel<>(motivo_da_vinda()));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Temperatura:");
+
+       
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel7.setText("Paciente esta com fortes dores?");
+
+        jCheckBoxDores.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxDores.setText("SIM");
+        
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Resultado do teste de clicemia:");
+
+       
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Resultado da pressão sístole:");
+
+        
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setText("Resultado da pressão diastóla:");
+
+        jScrollPane1.setViewportView(jTextPaneMotivoDaVinda);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("Selecione a cor:");
+
+        jComboBoxCor.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vermelho", "Laranja", "Amarelo", "Verde", "Azual" }));
+
+        jButtonTriagem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonTriagem.setText("Realizar Triagem");
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Região:");
+
+        jComboBoxRegiao.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxRegiao.setModel(new javax.swing.DefaultComboBoxModel<>(Regiao()));
+
+        jComboBoxBairro.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxBairro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { }));
+
+        jComboBoxRua.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jComboBoxRua.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {  }));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setText("Nº:");
+           
+        jTFNome.setText("");
+        jTFCEP.setText("");
+        jTFRG.setText("");
+        
+        jTextFieldNumero.setText("");
+        
+        jTextAreaMedicamento.setText("");
+        jTextFieldVomitou.setText("");
+        jTFQual.setText("");
+        jTextFieldRua.setText("");
+        jTFBairro.setText("");
+        jTextField4.setText("");
+        jTextFieldRua.setText("");
+        jTextFieldAltura.setText("");
+        jTextFieldDefecou.setText("");
+        jTextFieldProcedencia.setText("");
+        jTextPaneMotivoDaVinda.setText("");
+        
+        jComboBoxEstado.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        
+        
+        jLabelAltura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelAltura.setText("Informe a Altura do Paciente:");
+
+        jTextFieldAltura.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jLabelVomitou.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelVomitou.setText("O paciente Vomitou:");
+
+        jCheckBoxVomito.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxVomito.setText("SIM");
+
+        jLabelVezesVomitou.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelVezesVomitou.setText("informe ao lado quantas vezes o paciente vomitou: ");
+
+        jLabelDiarreia.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelDiarreia.setText("O paciente esta com diarreia:");
+
+        jCheckBoxDedecou.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxDedecou.setText("SIM");
+
+        jLabelDefecou.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelDefecou.setText(" Informe quantas vezes o paciente defecou:");
+                      
+        jLabelSangrando.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelSangrando.setText("O Paciente esta sangrando");
+
+        jCheckBoxSangrando.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxSangrando.setText("SIM");
+
+        jLabelTrauma.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelTrauma.setText("O Paciente tem trauma?");
+
+        jCheckBoxTrauma.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxTrauma.setText("SIM");
+        
+        jLabelSexo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelSexo.setText("Sexo:");
                 
             }      
         
@@ -538,7 +790,7 @@ public Triagem() {
         });
        
         
-         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -618,9 +870,10 @@ public Triagem() {
                                 .addComponent(jLabelAltura)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelSexo)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLPESO)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTPESO))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -646,14 +899,6 @@ public Triagem() {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(diastola, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextFieldTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jCheckBoxDores))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabelSangrando)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jCheckBoxSangrando)
@@ -667,7 +912,19 @@ public Triagem() {
                                                 .addComponent(jCheckBoxMedicamento)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jLabelMedicamento)))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jCheckBoxDores)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabelSexo)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBoxSEXO, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabelDiarreia)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -677,14 +934,11 @@ public Triagem() {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldDefecou))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBoxSEXO, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabelVomitou)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jCheckBoxVomito)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabelVezesVomitou)))
+                                .addComponent(jLabelVomitou)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxVomito)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelVezesVomitou)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldVomitou)))
                         .addGap(95, 95, 95))
@@ -785,8 +1039,8 @@ public Triagem() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAltura)
                     .addComponent(jTextFieldAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelSexo)
-                    .addComponent(jComboBoxSEXO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLPESO)
+                    .addComponent(jTPESO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelVomitou)
@@ -810,7 +1064,9 @@ public Triagem() {
                     .addComponent(jLabel6)
                     .addComponent(jTextFieldTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jCheckBoxDores))
+                    .addComponent(jCheckBoxDores)
+                    .addComponent(jLabelSexo)
+                    .addComponent(jComboBoxSEXO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
@@ -850,6 +1106,7 @@ public Triagem() {
                 .addGap(17, 17, 17))
         );
 
+        
         bindingGroup.bind();
          pack();
         setVisible(true);
@@ -979,7 +1236,45 @@ public static String rua(String id) throws SQLException{
         return r;
 }
 
+public String motivo(String nome) throws SQLException{
+  String sql = "SELECT Id FROM `motivo_da_vinda` WHERE motivo_da_vinda='"+nome+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("Id");
+                i++;
 
+        }
+        
+        return r;
+    
+    
+}
+
+public String proce(String nome) throws SQLException{
+  String sql = "SELECT id FROM `procedencia` WHERE Procedencia='"+nome+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      int i =1;
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("id");
+                i++;
+
+        }
+        
+        return r;
+    
+    
+}
 
 
 public static String bairro(String id) throws SQLException{
@@ -1001,11 +1296,39 @@ public static String bairro(String id) throws SQLException{
 }
 
 
-public static void atualiza(){
-    
-    
-    
-    
+public static void atualiza(String nome, String sexo, String rg, String altura, String peso, String zona, String cep, String n, String procedencia, String motivo, String cartaoSUS) throws SQLException{
+    Triagem t = new Triagem();
+    double p = Double.parseDouble(peso);
+ //   String sql = "UPDATE `paciente` SET `nome` = 'Joice Barbosa Fragoso', `sexo` = 'FEMININO', `rg` = '2005', `Altura` = '1.60', `Peso` = '66', `zona` = 'URBANA', `cep` = '63870000', `numero` = '10' WHERE `paciente`.`cartao_sus` = '2' AND `paciente`.`procedencia_id` = 1 AND `paciente`.`motivo_da_vinda_Id` = 1; ";
+   String sql = "UPDATE `paciente` SET `nome` = '"+nome+"', `sexo` = '"+sexo+"', `rg` = '"+rg+"', `Altura` = '"+altura+"', `Peso` = '"+p+"', `zona` = '"+zona+"', `cep` = '"+cep+"', `numero` = '"+n+"', `procedencia_id` = '"+procedencia+"', `motivo_da_vinda_Id` = '"+motivo+"' WHERE `paciente`.`cartao_sus` = '"+cartaoSUS+"';  "; 
+
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       stmt.execute();
+       stmt.close();
+        
+        t.jTFNome.setText("");
+        t.jTFCEP.setText("");
+       t.jTFRG.setText("");
+        
+        t.jTextFieldNumero.setText("");
+        
+        t.jTextAreaMedicamento.setText("");
+        t.jTextFieldVomitou.setText("");
+        t.jTFQual.setText("");
+        t.jTextFieldRua.setText("");
+        t.jTFBairro.setText("");
+        t.jTextField4.setText("");
+        t.jTextFieldRua.setText("");
+        t.jTextFieldAltura.setText("");
+        t.jTextFieldDefecou.setText("");
+        t.jTextFieldProcedencia.setText("");
+        t.jTPESO.setText("");
+        t.jTextPaneMotivoDaVinda.setText("");
+   
+   
+   
 }
 
 
@@ -1045,7 +1368,7 @@ public static String Rua_has_bairro(String id, int e) throws SQLException{
 
         }
         
-        return rua(r);
+        return bairro(r);
        }
     }
 
