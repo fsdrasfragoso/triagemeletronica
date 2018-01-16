@@ -229,6 +229,14 @@ public Triagem() {
           setTria(false);          
         
         if(!jTextNumeroCartaoSUS.getText().trim().equals("")){  
+        if(!jTextFieldProcedencia.getText().trim().equals("") && !jTextPaneMotivoDaVinda.getText().trim().equals("")){
+            try {
+                atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }else    
         if(jTextFieldProcedencia.getText().trim().equals("") ) {
         if(jTextPaneMotivoDaVinda.getText().trim().equals("")){
                      
@@ -1365,6 +1373,48 @@ public static String bairro(String id) throws SQLException{
         
         return r;
 }
+
+public static void cadastrar(String nome, String sexo, String rg, String altura, String peso, String zona, String cep, String n, String procedencia, String motivo, String cartaoSUS, String rua_has_bairro) throws SQLException{
+
+ Triagem t = new Triagem();
+    double p = Double.parseDouble(peso);
+ //   String sql = "UPDATE `paciente` SET `nome` = 'Joice Barbosa Fragoso', `sexo` = 'FEMININO', `rg` = '2005', `Altura` = '1.60', `Peso` = '66', `zona` = 'URBANA', `cep` = '63870000', `numero` = '10' WHERE `paciente`.`cartao_sus` = '2' AND `paciente`.`procedencia_id` = 1 AND `paciente`.`motivo_da_vinda_Id` = 1; ";
+   String sql = "INSERT INTO `paciente` (`cartao_sus`, `nome`, `sexo`, `rg`, `Altura`, `Peso`, `zona`, `cep`, `numero`, `procedencia_id`, `motivo_da_vinda_Id`, `rua_has_bairro_id`) VALUES ('"+cartaoSUS+"', '"+nome+"', '"+sexo+"', '"+rg+"', '"+altura+"', '"+peso+"', '"+zona+"', '"+cep+"', '"+n+"', '"+procedencia+"', '"+motivo+"', '"+rua_has_bairro+"');"; 
+
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       stmt.execute();
+       stmt.close();
+        
+        t.jTFNome.setText("");
+        t.jTFCEP.setText("");
+       t.jTFRG.setText("");
+        
+        t.jTextFieldNumero.setText("");
+        
+        t.jTextAreaMedicamento.setText("");
+        t.jTextFieldVomitou.setText("");
+        t.jTFQual.setText("");
+        t.jTextFieldRua.setText("");
+        t.jTFBairro.setText("");
+        t.jTextField4.setText("");
+        t.jTextFieldRua.setText("");
+        t.jTextFieldAltura.setText("");
+        t.jTextFieldDefecou.setText("");
+        t.jTextFieldProcedencia.setText("");
+        t.jTPESO.setText("");
+        t.jTextPaneMotivoDaVinda.setText("");
+   
+
+    
+    
+    
+}
+
+
+
+
 
 
 public static void atualiza(String nome, String sexo, String rg, String altura, String peso, String zona, String cep, String n, String procedencia, String motivo, String cartaoSUS) throws SQLException{
