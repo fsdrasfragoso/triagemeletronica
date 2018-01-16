@@ -404,12 +404,12 @@ public class TesteCadastro {
         Medico medico = new Medico();
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        medico.setId(4);
+        medico.setId(2);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("89999999429");
         medico.setEndereco("Bairro Junco");
         
-        enfermeiro.setId(5);
+        enfermeiro.setId(3);
         enfermeiro.setFone_fixo("8934225678");
         enfermeiro.setFone_celular("89932199429");
         enfermeiro.setEndereco("Centro");
@@ -443,12 +443,12 @@ public class TesteCadastro {
         Medico medico = new Medico();
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        medico.setId(6);
+        medico.setId(4);
         medico.setFone_fixo("34228078156");
         medico.setFone_celular("899994668481");
         medico.setEndereco("Paraibinha");
         
-        enfermeiro.setId(7);
+        enfermeiro.setId(5);
         enfermeiro.setFone_fixo("89342287801");
         enfermeiro.setFone_celular("899995665451");
         enfermeiro.setEndereco("Cohab");
@@ -471,7 +471,7 @@ public class TesteCadastro {
         Medico medico = new Medico();
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        medico.setId(8);
+        medico.setId(6);
         medico.setFone_fixo("893422243");
         medico.setFone_celular("8999999942");
         medico.setEndereco("Mesquita");
@@ -495,12 +495,12 @@ public class TesteCadastro {
         Medico medico = new Medico();
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        medico.setId(8);
+        medico.setId(7);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("");
         medico.setEndereco("Mesquita");
         
-        enfermeiro.setId(9);
+        enfermeiro.setId(10);
         enfermeiro.setFone_fixo("34222433");
         enfermeiro.setFone_celular("");
         enfermeiro.setEndereco("Olavo Quadros");
@@ -524,7 +524,7 @@ public class TesteCadastro {
         medico.setFone_celular("89999841001");
         medico.setEndereco("");
         
-        enfermeiro.setId(9);
+        enfermeiro.setId(11);
         enfermeiro.setFone_fixo("34222433");
         enfermeiro.setFone_celular("89999841001");
         enfermeiro.setEndereco("");
