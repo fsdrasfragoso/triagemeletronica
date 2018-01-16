@@ -87,6 +87,18 @@ public class Validar {
 		
 	}
         
+        public boolean camposNulosAlterarEnf(Enfermeiro enfermeiro) {
+		
+		if(!enfermeiro.getNome().equals("") &&
+                        !enfermeiro.getCoren().equals("") &&
+                        !enfermeiro.getSenha().equals("")) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+        
         public boolean checkCRM(String crm){
 		
 		this.crm = crm;

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -12,6 +14,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Alterar_Enfermeiro;
 import triagemeletronica.interfaces.administrador.Tela_Administrador_Alterar_Medico;
+import triagemeletronica.interfaces.enfermeiro.Tela_Enfermeiro_Alterar_Dados;
 import triagemeletronica.modelos.Enfermeiro;
 import triagemeletronica.modelos.Medico;
 
@@ -24,7 +27,126 @@ public class TesteAlterar {
     public TesteAlterar() {
     }
     
-     @Test
+    @Test
+    public void testeAlterarNomeValido() {
+        
+        Tela_Enfermeiro_Alterar_Dados alterar = new Tela_Enfermeiro_Alterar_Dados();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Francisco Sousa");
+        enfermeiro.setCoren("9876");
+        enfermeiro.setSenha("abcd#4356");
+        enfermeiro.setId(67);
+        
+        
+        try {
+            alterar.alterar_dados_Enfermeiro(enfermeiro);
+        } catch (Exception ex) {
+            Logger.getLogger(TesteCadastro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String nomeEnf = "Francisco Sousa";
+        
+        String nomeEnfermeiro = alterar.buscaEnfermeiro(enfermeiro).getNome();
+        
+        assertEquals(nomeEnfermeiro, nomeEnf);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeAlterarNomeInvalido() throws Exception{
+        
+        Tela_Enfermeiro_Alterar_Dados alterar = new Tela_Enfermeiro_Alterar_Dados();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("123#@!");
+        enfermeiro.setCoren("9876");
+        enfermeiro.setSenha("abcd1234");
+        enfermeiro.setPerfil("Enfermeiro");
+        enfermeiro.setId(67);
+        
+        alterar.alterar_dados_Enfermeiro(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeAlterarNomeNulo() throws Exception{
+        
+        Tela_Enfermeiro_Alterar_Dados alterar = new Tela_Enfermeiro_Alterar_Dados();
+       
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("");
+        enfermeiro.setCoren("9876");
+        enfermeiro.setSenha("Abcd%1234");
+        enfermeiro.setId(67);
+        
+        alterar.alterar_dados_Enfermeiro(enfermeiro);
+        
+    }
+    
+    @Test
+    public void testeAlterarSenhaValida() {
+        
+        Tela_Enfermeiro_Alterar_Dados alterar = new Tela_Enfermeiro_Alterar_Dados();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Francisco Sousa");
+        enfermeiro.setCoren("9876");
+        enfermeiro.setSenha("abcd$%4388");
+        enfermeiro.setId(67);
+        
+        
+        try {
+            alterar.alterar_dados_Enfermeiro(enfermeiro);
+        } catch (Exception ex) {
+            
+        }
+        
+        String senhaEnf = "abcd$%4388";
+        
+        String senhaEnfermeiro = alterar.buscaEnfermeiro(enfermeiro).getSenha();
+        
+        assertEquals(senhaEnfermeiro, senhaEnf);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeAlterarSenhaInvalida() throws Exception{
+        
+        Tela_Enfermeiro_Alterar_Dados alterar = new Tela_Enfermeiro_Alterar_Dados();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Francisco Sousa");
+        enfermeiro.setCoren("9876");
+        enfermeiro.setSenha("abcd");
+        enfermeiro.setId(67);
+        
+        alterar.alterar_dados_Enfermeiro(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeAlterarSenhaNula() throws Exception{
+        
+        Tela_Enfermeiro_Alterar_Dados alterar = new Tela_Enfermeiro_Alterar_Dados();
+       
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Francisco Sousa");
+        enfermeiro.setCoren("9876");
+        enfermeiro.setSenha("");
+        enfermeiro.setId(67);
+        
+        alterar.alterar_dados_Enfermeiro(enfermeiro);
+        
+    }
+    
+    @Test
     public void testeAlterarFone_Fixo_e_Celular_Valido() throws Exception {
         //teste de medico e enfermeiro validos (10 digitos fixo,11 digitos  celular)
         Tela_Administrador_Alterar_Medico alterar = new Tela_Administrador_Alterar_Medico();

@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import triagemeletronica.modelos.Enfermeiro;
+import triagemeletronica.modelos.Validar;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Tela_Enfermeiro_Alterar_Dados extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     PreparedStatement pst2 = null;
     ResultSet rs = null;
+    Enfermeiro enfermeiro = new Enfermeiro();
 
     /**
      * Creates new form Tela_Agenda_Adicionar
@@ -33,46 +36,67 @@ public class Tela_Enfermeiro_Alterar_Dados extends javax.swing.JInternalFrame {
         initComponents();
         conexao = Conexao.getConnection();
     }
-        
-        private void alterar_dados_Enfermeiro(){
+
+    public void alterar_dados_Enfermeiro(Enfermeiro enfermeiro) throws Exception{
        
         String sql2 = "update Usuarios set nome=?,login=?,senha=? where id=?";
       
          int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar os Dados do Usuario ", "Atenção", JOptionPane.YES_NO_OPTION);
 
         if (confirma == JOptionPane.YES_OPTION) {
+            
+            Validar validar = new Validar();
+            boolean nomeValido = validar.checkName(enfermeiro.getNome());
+            boolean senhaValida = validar.checkSenha(enfermeiro.getSenha());
+            boolean nulos = validar.camposNulosAlterarEnf(enfermeiro);
         
-        try {
-                        
-            pst2 = conexao.prepareStatement(sql2);
-            pst2.setString(1, txtNomeEnf.getText());
-            pst2.setString(2, txtLoginEnf.getText());
-            pst2.setString(3, txtSenhaEnf.getText());
-            pst2.setString(4, Tela_Do_Enfermeiro.txtNumID.getText());
-       
-              if (txtNomeEnf.getText().isEmpty() || txtLoginEnf.getText().isEmpty() || txtSenhaEnf.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos Obrigatorios");
-
-            }else{
-               int add2 = pst2.executeUpdate();
-
-                if (add2 > 0) {
-                    JOptionPane.showMessageDialog(null, "Alterado Com Sucesso");
-                    
-                    txtNomeEnf.setText(null);
-                    txtLoginEnf.setText(null);
-                    txtSenhaEnf.setText(null);
+            try {
+            
+                pst2 = conexao.prepareStatement(sql2);
+                pst2.setString(1, enfermeiro.getNome());
+                pst2.setString(2, enfermeiro.getCoren());
+                pst2.setString(3, enfermeiro.getSenha()); 
+                pst2.setInt(4, enfermeiro.getId());
+            
+                if(nulos == true && nomeValido == false && senhaValida == true){
+                    pst2.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Dados do enfermeiro alterados com sucesso!"); 
+            
+                }else{
+                    throw new Exception("Erro ao alterar dados do enfermeiro!");
                 }
-             }
-
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
+            
+            
+            
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, ex);
+                throw ex;
+            }
         }
-        }
+            
     }
-
-
+        
+    public Enfermeiro buscaEnfermeiro(Enfermeiro enfermeiro){
+         String sql = "select * from Usuarios where login = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, enfermeiro.getCoren());
+            rs = pst.executeQuery();
+            if(rs.next()){
+                enfermeiro.setNome(rs.getString("Nome"));
+                enfermeiro.setCoren(rs.getString("login"));
+                enfermeiro.setSenha(rs.getString("senha"));
+                enfermeiro.setPerfil(rs.getString("perfil"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados!"+ex);
+        }
+         
+         return enfermeiro;
+     }
+    
     private void pesquisar() {
 
         String sql = "select  * from Usuarios where login =? And Id=?";
@@ -263,7 +287,15 @@ public class Tela_Enfermeiro_Alterar_Dados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomeEnfActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        alterar_dados_Enfermeiro();
+        enfermeiro.setId(Integer.parseInt(Tela_Do_Enfermeiro.txtNumID.getText()));
+        enfermeiro.setNome(txtNomeEnf.getText());
+        enfermeiro.setCoren(txtLoginEnf.getText());
+        enfermeiro.setSenha(txtSenhaEnf.getText());
+        try {
+            alterar_dados_Enfermeiro(enfermeiro);
+        } catch (Exception ex) {
+            Logger.getLogger(Tela_Enfermeiro_Alterar_Dados.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
