@@ -36,6 +36,33 @@ public class Paciente {
     private int diarreia; 
     private int vomito; 
     private int testeClicemia; 
+    private String sexo;
+    private double altura; 
+    private double peso; 
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(double altura) {
+        this.altura = altura;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
 
     public int getTesteClicemia() {
         return testeClicemia;

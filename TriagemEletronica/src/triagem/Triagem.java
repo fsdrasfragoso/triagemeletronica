@@ -107,7 +107,8 @@ public class Triagem  extends JFrame{
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jLPESO;
     private javax.swing.JTextField jTPESO;
-    public  ArrayPacientes a = new ArrayPacientes();
+    private triagemeletronica.paciente.Paciente p; 
+    private triagemeletronica.array.ArrayPacientes a; 
     private boolean tria; 
 
     public boolean getTria() {
@@ -205,7 +206,7 @@ public Triagem() {
          jLPESO = new javax.swing.JLabel();
         jTPESO = new javax.swing.JTextField();
          jCheckBoxDiabetes = new javax.swing.JCheckBox();
-        
+          a = new triagemeletronica.array.ArrayPacientes();
         
         
         
@@ -225,9 +226,31 @@ public Triagem() {
             jButtonTriagem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(getTria()){
+               p = new triagemeletronica.paciente.Paciente(); 
+               p.setCartao_sus(jTextNumeroCartaoSUS.getText());
+               if (jCheckBoxAlergia.isSelected()){
+       // true       
+                     p.setResultado_alergia("O paciente é alergico a: "+jTFQual.getText());
+                     p.setAlergia(true);
+                  }else {
+        // false   
+                   p.setResultado_alergia("O Pacinte não possuir alergia a nenhum medicamento");
+                   p.setAlergia(false);
+                            }
+               
+               
+               if(jCheckBoxDedecou.isSelected()){
+                   p.setDiarreia(Integer.parseInt(jTextFieldDefecou.getText()));
+               }else{
+                   p.setDiarreia(0);
+               }
+               
+               
+               
+               if(getTria()){
                    // System.err.println("adiciona");
-        
+                       
+                       
           setTria(false);          
         
         if(!jTextNumeroCartaoSUS.getText().trim().equals("")){  
@@ -281,6 +304,19 @@ public Triagem() {
       if(jTFBairro.getText().equals("")){
           try {
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+  p.setNome(jTFNome.getText()); 
+  p.setSexo((String)jComboBoxSEXO.getSelectedItem()); 
+  p.setRg(jTFRG.getText());
+  p.setAltura(Double.parseDouble(jTextFieldAltura.getText())); 
+  p.setPeso(Double.parseDouble(jTPESO.getText()));
+  p.setZona((String)jComboBoxZona.getSelectedItem());
+  p.setCep(jTFCEP.getText()); p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
+  p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
+  p.setCidade((String)jComboBoxCidade.getSelectedItem()); 
+  p.setRua((String)jComboBoxRua.getSelectedItem());
+  p.setProcedencia(jTextFieldProcedencia.getText());
+  p.setNumero(Integer.parseInt(jTextFieldNumero.getText())); 
+             
               
               // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
           } catch (SQLException ex) {
@@ -1808,6 +1844,48 @@ public static String NomeBairro(String id) throws SQLException{
 
 }
 
+public static String Motivo(String id) throws SQLException{
+ String   sql = "SELECT motivo_da_vinda FROM `motivo_da_vinda` WHERE Id='"+id+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+     
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("motivo_da_vinda");
+                
+
+        }
+        
+        return r;
+    
+    
+}
+
+public static String procede(String id) throws SQLException{
+    String sql = "SELECT Procedencia FROM `procedencia` WHERE id='"+id+"';";
+          Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+     
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("Procedencia");
+                
+
+        }
+        
+        return r;
+ 
+
+
+}
+
+
 
 public void atualiza(String nome, String sexo, String rg, String altura, String peso, String zona, String cep, String n, String procedencia, String motivo, String cartaoSUS) throws SQLException{
     Triagem t = new Triagem();
@@ -1820,56 +1898,7 @@ public void atualiza(String nome, String sexo, String rg, String altura, String 
        PreparedStatement stmt = con.prepareStatement(sql); 
        stmt.execute();
        stmt.close();
-       
-       t.p().setNome(nome);
-       t.p().setCartao_sus(cartaoSUS);
-       t.p().setCidade("Boa Viagem");
-       t.p().setCep(cep);
-       int cor = 7;
-      String orc = (String) t.jComboBoxCor.getSelectedItem(); ;
-             //"Vermelho", "Laranja", "Amarelo", "Verde", "Azual"
-       if(orc.equals("Vermelho")){
-           Math.pow(cor,5); 
-       }else if(orc.equals("Laranja")){
-           Math.pow(cor, 4);
-       }else if(orc.equals("Amarelo")){
-           Math.pow(cor,3);
-       }else if(orc.equals("Verde")){
-           Math.pow(cor, 1);
-       }else{
-           cor = 5; 
-       }
-       t.p().setCor(cor);
-       t.p().setDiabetico(jCheckBoxDiabetes.getVerifyInputWhenFocusTarget());
-       t.p().setDores(jCheckBoxDores.getVerifyInputWhenFocusTarget());
-       t.p().setAlergia(jCheckBoxAlergia.getVerifyInputWhenFocusTarget());
-       t.p().setDiastola(Integer.parseInt(diastola.getText()));
-       t.p().setSistole(Integer.parseInt(Sistole.getText()));
-       t.p().setNumero(Integer.parseInt(n));
-       t.p().setRg(rg);
-       t.p().setTemperatura(Float.parseFloat(jTextFieldTemperatura.getText()));
-       t.p().setZona(zona);
-       t.p().setTesteClicemia(Integer.parseInt(jTextField4.getText()));
-       if(jCheckBoxDedecou.getVerifyInputWhenFocusTarget()){
-           t.p().setDiarreia(Integer.parseInt(jTextFieldDefecou.getText()));
-       }else{
-           t.p().setDiarreia(0); 
-       }
-       if(jCheckBoxVomito.getVerifyInputWhenFocusTarget()){
-           t.p().setVomito(Integer.parseInt(jTextFieldVomitou.getText()));
-           
-       }else{
-           t.p().setVomito(0); 
-       }
-       
-       
-       
-        t.jTFNome.setText("");
-        t.jTFCEP.setText("");
-       t.jTFRG.setText("");
-        
-        t.jTextFieldNumero.setText("");
-        
+
         t.jTextAreaMedicamento.setText("");
         t.jTextFieldVomitou.setText("");
         t.jTFQual.setText("");
