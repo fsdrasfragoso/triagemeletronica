@@ -39,6 +39,34 @@ public class Paciente {
     private String sexo;
     private double altura; 
     private double peso; 
+    private String medicamento; 
+    private int sangrando; 
+    private int trauma; 
+
+    public int getTrauma() {
+        return trauma;
+    }
+
+    public void setTrauma(int trauma) {
+        this.trauma = trauma;
+    }
+    
+
+    public int getSangrando() {
+        return sangrando;
+    }
+
+    public void setSangrando(int sangrando) {
+        this.sangrando = sangrando;
+    }
+
+    public String getMedicamento() {
+        return medicamento;
+    }
+
+    public void setMedicamento(String medicamento) {
+        this.medicamento = medicamento;
+    }
 
     public double getPeso() {
         return peso;
