@@ -57,7 +57,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
                 pst.setString(3, enfermeiro.getSenha());
                 pst.setString(4, enfermeiro.getPerfil());
 
-                if(nulos == true && nomeValido == false && perfilValido == true && senhaValida == true && corenValido == false){
+                if(nulos == true && nomeValido == true && perfilValido == true && senhaValida == true && corenValido == false){
                     int add = pst.executeUpdate();
                     //JOptionPane.showMessageDialog(null, "Dados de usuário do enfermeiro cadastrados com sucesso!");
                 }else{
@@ -142,9 +142,11 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
             String sql2 = "insert into Enfermeiro(ID,Telefone_Fixo,Telefone_Celular,Endereco) values (?,?,?,?)";
         
             Validar validar = new Validar();
-            boolean nulos = validar.camposNulosEnfEnd(enfermeiro);
+            boolean nulosEnd = validar.camposNulosEnfEnd(enfermeiro);
             boolean fone10Digitos = validar.checkFone_FixoEnf10DigitosOuNulo(enfermeiro.getFone_fixo());
+            boolean fone_fixoValido = validar.checkFone_FixoEnf_valido(enfermeiro.getFone_fixo());
             boolean celular11Digitos = validar.checkCelularEnf11Digitos(enfermeiro.getFone_celular());
+            boolean celularValido = validar.checkCelularEnf_valido(enfermeiro.getFone_celular());
         
             try {
             
@@ -154,7 +156,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
                 pst2.setString(3, enfermeiro.getFone_celular());
                 pst2.setString(4, enfermeiro.getEndereco());        
             
-                if(nulos == true && fone10Digitos == true && celular11Digitos == true){
+                if(nulosEnd == true && fone10Digitos == true && fone_fixoValido == false && celular11Digitos == true && celularValido == false){
                     pst2.executeUpdate();
                     //JOptionPane.showMessageDialog(null, "Dados de endereço e telefone do enfermeiro cadastrados com sucesso!"); 
             
@@ -396,11 +398,28 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
         enfermeiro.setFone_celular(txtTelCelEnf1.getText());
         enfermeiro.setEndereco(txtEndEnf.getText());
         
-        try {
-            adicionando();
-        } catch (Exception ex) {
-            Logger.getLogger(Tela_Administrador_Adicionar_Enfermeiro.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Validar validar = new Validar();
+        boolean nomeValido = validar.checkName(txtNomeEnf.getText());
+        boolean corenValido = validar.checkCoren(txtCorenEnf.getText());
+        boolean perfilValido = validar.checkPerfilEnf(txtPerfilEnf.getText());
+        boolean senhaValida = validar.checkSenha(txtSenhaEnf.getText());
+        boolean nulos = validar.camposNulosEnf(enfermeiro);
+        boolean nulosEnd = validar.camposNulosEnfEnd(enfermeiro);
+        boolean fone10Digitos = validar.checkFone_FixoEnf10DigitosOuNulo(txtTelFixEnf.getText());
+        boolean fone_fixoValido = validar.checkFone_FixoEnf_valido(txtTelFixEnf.getText());
+        boolean celular11Digitos = validar.checkCelularEnf11Digitos(txtTelCelEnf1.getText());
+        boolean celularValido = validar.checkCelularEnf_valido(txtTelCelEnf1.getText());
+        
+        if(nulos == true && nomeValido == true && perfilValido == true && senhaValida == true && corenValido == false && nulosEnd == true && fone10Digitos == true && fone_fixoValido == false && celular11Digitos == true && celularValido == false) {
+            try {
+                adicionando();
+                JOptionPane.showMessageDialog(null, "Dados do enfermeiro cadastrados com sucesso!");
+            } catch (Exception ex) {
+                Logger.getLogger(Tela_Administrador_Adicionar_Enfermeiro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Dados inválidos");
+        } 
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

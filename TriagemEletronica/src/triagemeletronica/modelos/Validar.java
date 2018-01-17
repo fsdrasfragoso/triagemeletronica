@@ -33,7 +33,7 @@ public class Validar {
 		
 		this.nome = nome;
 		
-		Pattern p = Pattern.compile("[0-9!@#$%&*]");
+		Pattern p = Pattern.compile("^[a-zA-Z\\u00C0-\\u017F´]+\\s+[a-zA-Z\\u00C0-\\u017F´]{0,}$");
 		Matcher m = p.matcher(nome);
 		
 		if(m.find()){
@@ -280,7 +280,7 @@ public class Validar {
                 }
             }
             
-            if(achouNumero == true && achouMaiuscula == true && achouMinuscula == true && achouSimbolo){
+            if(achouNumero == true && achouMaiuscula == true && achouMinuscula == true && achouSimbolo && senha.length() >= 8){
                 return true;
             }else{
                 return false;

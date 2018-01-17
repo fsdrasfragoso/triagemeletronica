@@ -31,12 +31,11 @@ public class TesteCadastroEnfermeiro {
         
         Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
         
-        Medico medico = new Medico();
         Enfermeiro enfermeiro = new Enfermeiro();
         
         enfermeiro.setNome("João Sousa");
-        enfermeiro.setCoren("9876");
-        enfermeiro.setSenha("abcd#4356");
+        enfermeiro.setCoren("85108543");
+        enfermeiro.setSenha("Abcd#4356");
         enfermeiro.setPerfil("Enfermeiro");
  
         try {
@@ -49,24 +48,158 @@ public class TesteCadastroEnfermeiro {
         
         String nomeEnfermeiro = adicionarEnf.buscaEnfermeiro(enfermeiro).getNome();
         
-        assertEquals(nomeEnfermeiro, nomeEnf);
+        assertEquals(nomeEnf, nomeEnfermeiro);
         
     }
     
     @Test(expected = Exception.class)
-    public void testeNomeInvalido() throws Exception{
+    public void testeSomentePrimeiroNome() throws Exception{
         
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setNome("123#@!");
-        enfermeiro.setCoren("9876");
-        enfermeiro.setSenha("abcd");
+        enfermeiro.setNome("João");
+        enfermeiro.setCoren("18902391");
+        enfermeiro.setSenha("Abcd#@123");
         enfermeiro.setPerfil("Enfermeiro");
         
-        adicionarEnf.adicionar_usuario(enfermeiro);
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSomentePrimeiroNomeComNumeros() throws Exception{
         
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João123");
+        enfermeiro.setCoren("67840983");
+        enfermeiro.setSenha("Abcd#$123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSomentePrimeiroNomeComCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João!@#$");
+        enfermeiro.setCoren("8567346783");
+        enfermeiro.setSenha("Aabcd#$@123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSomentePrimeiroNomeComCaracteresEspeciaisENumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João%$#123");
+        enfermeiro.setCoren("17683948");
+        enfermeiro.setSenha("Abcd!@#123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeNomeComNumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João123 Sousa");
+        enfermeiro.setCoren("8965489536");
+        enfermeiro.setSenha("Abcd!@#123");
+        enfermeiro.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeNomeComCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João#$@ Sousa");
+        enfermeiro.setCoren("90647392");
+        enfermeiro.setSenha("Abcd!@123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeNomeComCaractresEspeciaisENumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João@#$123 Sousa");
+        enfermeiro.setCoren("89034672");
+        enfermeiro.setSenha("Abcd@#123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSobreNomeComNumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João Sousa123");
+        enfermeiro.setCoren("679204");
+        enfermeiro.setSenha("Abcd@#123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSobreNomeComCaractresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João Sousa@#$");
+        enfermeiro.setCoren("901273");
+        enfermeiro.setSenha("Abcd@#123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSobreNomeComCaractresEspeciaisENumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("João Sousa@#123");
+        enfermeiro.setCoren("465792340");
+        enfermeiro.setSenha("Abcd#@123");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
     }
     
     @Test(expected = Exception.class)
@@ -77,8 +210,8 @@ public class TesteCadastroEnfermeiro {
         Enfermeiro enfermeiro = new Enfermeiro();
         
         enfermeiro.setNome("");
-        enfermeiro.setCoren("9876");
-        enfermeiro.setSenha("abcd*9876");
+        enfermeiro.setCoren("98765634");
+        enfermeiro.setSenha("Abcd*9876");
         enfermeiro.setPerfil("Enfermeiro");
         
         adicionarEnf.adicionar_usuario(enfermeiro);
@@ -92,9 +225,9 @@ public class TesteCadastroEnfermeiro {
         
         Enfermeiro enferrmeiro = new Enfermeiro();
         
-        enferrmeiro.setNome("Maria");
-        enferrmeiro.setCoren("8965");
-        enferrmeiro.setSenha("abcd%$2341");
+        enferrmeiro.setNome("Diego Sousa");
+        enferrmeiro.setCoren("89657823");
+        enferrmeiro.setSenha("Abcd%$2341");
         enferrmeiro.setPerfil("Enfermeiro");
         
         try {
@@ -103,7 +236,7 @@ public class TesteCadastroEnfermeiro {
             Logger.getLogger(TesteCadastroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String corenEnf = "8965";
+        String corenEnf = "89657823";
         
         String corenEnfermeiro = adicionar.buscaEnfermeiro(enferrmeiro).getCoren();
         
@@ -112,18 +245,98 @@ public class TesteCadastroEnfermeiro {
     }
     
     @Test(expected = Exception.class)
-    public void testeCorenInvalido() throws Exception{
+    public void testeCorenComLetras() throws Exception{
         
         Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
-        Enfermeiro enferrmeiro = new Enfermeiro();
+        Enfermeiro enfermeiro = new Enfermeiro();
         
-        enferrmeiro.setNome("Maria");
-        enferrmeiro.setCoren("8abc3#1");
-        enferrmeiro.setSenha("abcd@#$543");
-        enferrmeiro.setPerfil("Enfermeiro");
+        enfermeiro.setNome("Diego Sousa");
+        enfermeiro.setCoren("123456abc");
+        enfermeiro.setSenha("Abcd*&654");
+        enfermeiro.setPerfil("Enfermeiro");
         
-        adicionar.adicionar_usuario(enferrmeiro);
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCorenComCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Diego Sousa");
+        enfermeiro.setCoren("123456@#$");
+        enfermeiro.setSenha("Abcd*&654");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCorenComLetrasECaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Diego Sousa");
+        enfermeiro.setCoren("123456abc$%#");
+        enfermeiro.setSenha("Abcd*&654");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCorenSomenteLetras() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Diego Sousa");
+        enfermeiro.setCoren("abcdefg");
+        enfermeiro.setSenha("Abcd*&654");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCorenSomenteCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Diego Sousa");
+        enfermeiro.setCoren("#@!$%");
+        enfermeiro.setSenha("Abcd*&654");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCorenSomenteLetrasECaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Diego Sousa");
+        enfermeiro.setCoren("abcd#@!$%");
+        enfermeiro.setSenha("Abcd*&654");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
         
     }
 
@@ -150,7 +363,7 @@ public class TesteCadastroEnfermeiro {
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setNome("Fabiano Sousa");
+        enfermeiro.setNome("Fabrício Sousa");
         enfermeiro.setCoren("93257");
         enfermeiro.setSenha("Abc#45456");
         enfermeiro.setPerfil("Enfermeiro");
@@ -161,21 +374,155 @@ public class TesteCadastroEnfermeiro {
             Logger.getLogger(TesteCadastroMedico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        String senhaEnfermeiro = "Abc#45456";
+        
+        String senhaEnf = adicionarEnf.buscaEnfermeiro(enfermeiro).getSenha();
+        
+        assertEquals(senhaEnf, senhaEnfermeiro);
+        
     }
     
     @Test(expected = Exception.class)
-    public void testeSenhaInvalida() throws Exception{
+    public void testeSenhaMenosDe8Caracteres() throws Exception{
         
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
         enfermeiro.setNome("Fabrício Sousa");
-        enfermeiro.setCoren("93257");
-        enfermeiro.setSenha("Abc");
+        enfermeiro.setCoren("87654876");
+        enfermeiro.setSenha("ab#$12");
         enfermeiro.setPerfil("Enfermeiro");
         
-        adicionarEnf.adicionar_usuario(enfermeiro);
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSomenteLetras() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("67346543");
+        enfermeiro.setSenha("abcdefghij");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSomenteNumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("6458098223");
+        enfermeiro.setSenha("12345678");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSomenteCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("24706754");
+        enfermeiro.setSenha("@#$%&*!##");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSomenteLetrasECaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("018987543");
+        enfermeiro.setSenha("abcde@#$");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSomenteNumerosECaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("48938976");
+        enfermeiro.setSenha("12345678@#$");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSomenteLetrasENumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("295687956");
+        enfermeiro.setSenha("12345678Abcd");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSemLetraMinuscula() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("054789456");
+        enfermeiro.setSenha("ABC123@#$");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSenhaSemLetraMaiuscula() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Fabrício Sousa");
+        enfermeiro.setCoren("792304");
+        enfermeiro.setSenha("abc123@#$");
+        enfermeiro.setPerfil("Enfermeiro");
+        
+        adicionar.adicionar_usuario(enfermeiro);
         
     }
     
@@ -187,7 +534,7 @@ public class TesteCadastroEnfermeiro {
         Enfermeiro enfermeiro = new Enfermeiro();
         
         enfermeiro.setNome("Fabrício Sousa");
-        enfermeiro.setCoren("93257");
+        enfermeiro.setCoren("932578934");
         enfermeiro.setSenha("");
         enfermeiro.setPerfil("Enfermeiro");
         
@@ -202,9 +549,9 @@ public class TesteCadastroEnfermeiro {
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setNome("Pedro");
-        enfermeiro.setCoren("3456");
-        enfermeiro.setSenha("abcd#$%1234");
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("3456876");
+        enfermeiro.setSenha("Abcd#$%1234");
         enfermeiro.setPerfil("Enfermeiro");
         
         try {
@@ -222,18 +569,114 @@ public class TesteCadastroEnfermeiro {
     }
     
     @Test(expected = Exception.class)
-    public void testePerfilInvalido() throws Exception{
+    public void testePerfilDiferente() throws Exception{
         
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setNome("Bruno");
-        enfermeiro.setCoren("73546");
-        enfermeiro.setSenha("abcd");
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("06546534");
+        enfermeiro.setSenha("Abcd$%4567");
         enfermeiro.setPerfil("Administrador");
         
-        adicionarEnf.adicionar_usuario(enfermeiro);
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilComNumeroECaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("9468235398");
+        enfermeiro.setSenha("Abcd$%4567");
+        enfermeiro.setPerfil("Enfermeiro123@#$");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilComNumero() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("74567803");
+        enfermeiro.setSenha("abcd$%4567");
+        enfermeiro.setPerfil("Enfermeiro123");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilComCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("23789463");
+        enfermeiro.setSenha("Abcd$%4567");
+        enfermeiro.setPerfil("Enfermeiro@#$");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilSomenteCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("639026709");
+        enfermeiro.setSenha("Abc#$av123");
+        enfermeiro.setPerfil("@#$!$%&");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilSomenteNumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("684532765");
+        enfermeiro.setSenha("Aabcd$%4567");
+        enfermeiro.setPerfil("1234567");
+        
+        adicionar.adicionar_usuario(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilSomenteNumerosECaraceresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setNome("Joaquim Moura");
+        enfermeiro.setCoren("836574232");
+        enfermeiro.setSenha("Aabcd$%4567");
+        enfermeiro.setPerfil("1234567#$@!");
+        
+        adicionar.adicionar_usuario(enfermeiro);
         
     }
     
@@ -244,101 +687,345 @@ public class TesteCadastroEnfermeiro {
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setNome("Bruno");
-        enfermeiro.setCoren("4987");
-        enfermeiro.setSenha("abcd");
+        enfermeiro.setNome("Bruno Alcântra");
+        enfermeiro.setCoren("49879865");
+        enfermeiro.setSenha("Abcd#$123");
         enfermeiro.setPerfil("");
         
         adicionarEnf.adicionar_usuario(enfermeiro);
         
     }
-     
+    
     @Test
-    public void testeFone_Fixo_e_Celular_Valido() throws Exception {
+    public void testeFone_FixoValido() throws Exception {
         //teste de medico e enfermeiro validos (10 digitos fixo,11 digitos  celular)
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(2);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("89999999429");
+        enfermeiro.setEndereco("Bairro Junco");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+        String fone_fixo_Enf = "8934222433";
+                
+        String fone_fixo_Enfermeiro = adicionar.buscaEndEnfermeiro(enfermeiro).getFone_fixo();
+        
+        assertEquals(fone_fixo_Enfermeiro, fone_fixo_Enf);
+        
+    }
+    
+     @Test(expected = Exception.class)
+    public void testeFone_Fixo_Invalido_1valoracima() throws Exception{
+             //teste de medico e enfermeiro Invalidos (11 digitos fixo,12 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
         enfermeiro.setId(3);
-        enfermeiro.setFone_fixo("8934225678");
-        enfermeiro.setFone_celular("89932199429");
-        enfermeiro.setEndereco("Centro");
+        enfermeiro.setFone_fixo("34228078156");
+        enfermeiro.setFone_celular("89999426321");
+        enfermeiro.setEndereco("Paraibinha");
         
-        adicionarEnf.adicionar_endereco(enfermeiro);
+        adicionar.adicionar_endereco(enfermeiro);
         
-        String fone_fixo_Enf = "8934225678";
-        String fone_celu_Enf = "89932199429";
+    }
+
+    @Test(expected = Exception.class)
+    public void testeFone_Fixo_Invalido_1valorabaixo() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(4);
+        enfermeiro.setFone_fixo("893422243");
+        enfermeiro.setFone_celular("89999424563");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoComLetras() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(5);
+        enfermeiro.setFone_fixo("893422abcd");
+        enfermeiro.setFone_celular("89999424563");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoComCaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(6);
+        enfermeiro.setFone_fixo("893422@#$%");
+        enfermeiro.setFone_celular("89999424563");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoComLetrasECaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(7);
+        enfermeiro.setFone_fixo("893422ab$%");
+        enfermeiro.setFone_celular("89999424563");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoSomenteLetras() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(8);
+        enfermeiro.setFone_fixo("abcdefghij");
+        enfermeiro.setFone_celular("89999424563");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoSomenteCaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(9);
+        enfermeiro.setFone_fixo("@#$%&*!@#$");
+        enfermeiro.setFone_celular("89999424563");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoSomenteLetrasECaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(10);
+        enfermeiro.setFone_fixo("ab$%fg$%!@");
+        enfermeiro.setFone_celular("89999424563");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test
+    public void Celular_Valido() throws Exception {
+        //teste de medico e enfermeiro validos (10 digitos fixo,11 digitos  celular)
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(11);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("89999999429");
+        enfermeiro.setEndereco("Bairro Junco");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+        String fone_celu_Enf = "89999999429";
                 
-        String fone_fixo_Enfermeiro = adicionarEnf.buscaEndEnfermeiro(enfermeiro).getFone_fixo();
-        String fone_celu_Enfermeiro = adicionarEnf.buscaEndEnfermeiro(enfermeiro).getFone_celular();
+        String fone_celu_Enfermeiro = adicionar.buscaEndEnfermeiro(enfermeiro).getFone_celular();
         
-        assertEquals(fone_fixo_Enfermeiro, fone_fixo_Enf);
         assertEquals(fone_celu_Enfermeiro, fone_celu_Enf);
         
     }
     
      @Test(expected = Exception.class)
-    public void testeFone_Fixo_e_Celular_Invalido_1valoracima() throws Exception{
+    public void testeCelular_Invalido_1valoracima() throws Exception{
              //teste de medico e enfermeiro Invalidos (11 digitos fixo,12 digitos celular)estes testes de valores invalidos sao de limite para os dois
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setId(5);
-        enfermeiro.setFone_fixo("89342287801");
-        enfermeiro.setFone_celular("899995665451");
-        enfermeiro.setEndereco("Cohab");
+        enfermeiro.setId(12);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("899994668481");
+        enfermeiro.setEndereco("Paraibinha");
         
-        adicionarEnf.adicionar_endereco(enfermeiro);
+        adicionar.adicionar_endereco(enfermeiro);
         
     }
-
+    
     @Test(expected = Exception.class)
-    public void testeFone_Fixo_e_Celular_Invalido_1valorabaixo() throws Exception{
+    public void testeCelular_Invalido_1valorabaixo() throws Exception{
              //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setId(9);
-        enfermeiro.setFone_fixo("893422156");
-        enfermeiro.setFone_celular("8993214994");
-        enfermeiro.setEndereco("Olavo Quadros");
+        enfermeiro.setId(13);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("8999999942");
+        enfermeiro.setEndereco("Mesquita");
         
-        adicionarEnf.adicionar_endereco(enfermeiro);
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularComLetras() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(14);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("8999942abcd");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularComCaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(15);
+        enfermeiro.setFone_fixo("8934222233");
+        enfermeiro.setFone_celular("8999942@#!$");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularComLetrasECaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(16);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("89999ab@#");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularSomenteLetras() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(17);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("abcdefghijk");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularSomenteCaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(18);
+        enfermeiro.setFone_fixo("8934222@#!$");
+        enfermeiro.setFone_celular("!@#$%&*!@#$");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularSomenteLetrasECaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
+        
+        Enfermeiro enfermeiro = new Enfermeiro();
+        
+        enfermeiro.setId(19);
+        enfermeiro.setFone_fixo("8934222433");
+        enfermeiro.setFone_celular("abcdefg!@#$");
+        enfermeiro.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(enfermeiro);
         
     }
     
     @Test(expected = Exception.class)
     public void testeCelular_Nulo() throws Exception{
        //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setId(10);
-        enfermeiro.setFone_fixo("34222433");
+        enfermeiro.setId(20);
+        enfermeiro.setFone_fixo("8934222433");
         enfermeiro.setFone_celular("");
-        enfermeiro.setEndereco("Olavo Quadros");
+        enfermeiro.setEndereco("Mesquita");
         
-        adicionarEnf.adicionar_endereco(enfermeiro);
+        adicionar.adicionar_endereco(enfermeiro);
         
     }
     
     @Test(expected = Exception.class)
     public void testeEndereco_Nulo() throws Exception{
         
-        Tela_Administrador_Adicionar_Enfermeiro adicionarEnf = new Tela_Administrador_Adicionar_Enfermeiro();
+        Tela_Administrador_Adicionar_Enfermeiro adicionar = new Tela_Administrador_Adicionar_Enfermeiro();
         
         Enfermeiro enfermeiro = new Enfermeiro();
         
-        enfermeiro.setId(11);
-        enfermeiro.setFone_fixo("34222433");
+        enfermeiro.setId(21);
+        enfermeiro.setFone_fixo("8934222433");
         enfermeiro.setFone_celular("89999841001");
         enfermeiro.setEndereco("");
         
-        adicionarEnf.adicionar_endereco(enfermeiro);
+        adicionar.adicionar_endereco(enfermeiro);
         
     }
+   
 }

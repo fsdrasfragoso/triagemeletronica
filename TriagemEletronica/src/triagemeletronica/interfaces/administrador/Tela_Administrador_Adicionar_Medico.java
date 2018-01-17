@@ -58,7 +58,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             pst.setString(3, medico.getSenha());
             pst.setString(4, medico.getPerfil());
 
-            if (nomeValido == false && crmValido == false && camposNulos == true && senhaValida == true && perfil == true) {
+            if (nomeValido == true && crmValido == false && camposNulos == true && senhaValida == true && perfil == true) {
                 int add = pst.executeUpdate();
                 //JOptionPane.showMessageDialog(null, "Dados de usuário do médico cadastrados com sucesso!");
             } else {
@@ -66,7 +66,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             }
 
         } catch (SQLException e) {
-            throw e;
+            throw new Exception();
         }catch (Exception ex){
             //JOptionPane.showMessageDialog(null, ex);
             throw ex;
@@ -400,11 +400,30 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
         medico.setFone_fixo(txtTelFixMed.getText());
         medico.setFone_celular(txtTelCelMed.getText());
         
-        try {
-            adicionando();
-        } catch (Exception ex) {
-            Logger.getLogger(Tela_Administrador_Adicionar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+        Validar validar = new Validar();
+        boolean nomeValido = validar.checkName(txtNomeMed.getText());
+        boolean crmValido = validar.checkCRM(txtCrmMed.getText());
+        boolean camposNulos = validar.camposNulosMed(medico);
+        boolean senhaValida = validar.checkSenha(txtSenhaMed.getText());
+        boolean perfil = validar.checkPerfilMed(txtPerfilMed.getText());
+        boolean nulos = validar.camposNulosMedEnd(medico);
+        boolean fone_fixo10Digitos = validar.checkFone_FixoMed10DigitosOuNulo(medico.getFone_fixo());
+        boolean fone_fixoValido = validar.checkFone_FixoMed_valido(medico.getFone_fixo());
+        boolean celular11Digitos = validar.checkCelularMed11Digitos(medico.getFone_celular());
+        boolean celularValido = validar.checkCelularMed_valido(medico.getFone_celular());
+        
+        if (nomeValido == true && crmValido == false && camposNulos == true && senhaValida == true && perfil == true && nulos == true && fone_fixoValido == false && fone_fixo10Digitos == true && celular11Digitos == true && celularValido == false) {
+            try {
+                adicionando();
+                JOptionPane.showMessageDialog(null, "Dados do médico cadastrados com sucesso!");
+            }catch (Exception ex) {
+                Logger.getLogger(Tela_Administrador_Adicionar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Dados inválidos!");
         }
+        
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

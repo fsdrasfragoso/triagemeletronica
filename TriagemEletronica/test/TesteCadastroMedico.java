@@ -55,9 +55,69 @@ public class TesteCadastroMedico {
         String nomeMed = "Marcio Sousa";
         
         String nomeMedico = adicionar.buscaMedico(medico).getNome();
-        
+                
         assertEquals(nomeMedico, nomeMed);
         
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSomentePrimeiroNome() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Márcio");
+        medico.setCrm("1508");
+        medico.setSenha("Abcd#$123");
+        medico.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(medico);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSomentePrimeiroNomeComNumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Márcio123");
+        medico.setCrm("6490");
+        medico.setSenha("Abcd#$%123");
+        medico.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(medico);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSomentePrimeiroNomeComCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Márcio%$#");
+        medico.setCrm("856734");
+        medico.setSenha("Aabcd#$@123");
+        medico.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(medico);
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeSomentePrimeiroNomeComCaracteresEspeciaisENumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Márcio%$#123");
+        medico.setCrm("1239865");
+        medico.setSenha("Abcd!@#123");
+        medico.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(medico);
     }
     
     @Test(expected = Exception.class)
@@ -68,23 +128,23 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Márcio123 Sousa");
-        medico.setCrm("0321");
-        medico.setSenha("abcd");
+        medico.setCrm("89654");
+        medico.setSenha("Abcd!@#123");
         medico.setPerfil("Medico");
         
         adicionar.adicionar_usuario(medico);
     }
     
     @Test(expected = Exception.class)
-    public void testeNomeComCaractresEspeciais() throws Exception{
+    public void testeNomeComCaracteresEspeciais() throws Exception{
         
         Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
         
         Medico medico = new Medico();
         
-        medico.setNome("Márcio@#$ Sousa");
-        medico.setCrm("0321");
-        medico.setSenha("abcd");
+        medico.setNome("Márcio#$@ Sousa");
+        medico.setCrm("239856");
+        medico.setSenha("Abcd!@123");
         medico.setPerfil("Medico");
         
         adicionar.adicionar_usuario(medico);
@@ -98,8 +158,8 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Márcio@#$123 Sousa");
-        medico.setCrm("0321");
-        medico.setSenha("abcd");
+        medico.setCrm("9821");
+        medico.setSenha("Abcd@#123");
         medico.setPerfil("Medico");
         
         adicionar.adicionar_usuario(medico);
@@ -113,8 +173,8 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Márcio Sousa123");
-        medico.setCrm("0321");
-        medico.setSenha("abcd");
+        medico.setCrm("1890");
+        medico.setSenha("Abcd@#123");
         medico.setPerfil("Medico");
         
         adicionar.adicionar_usuario(medico);
@@ -128,8 +188,8 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Márcio Sousa@#$");
-        medico.setCrm("0321");
-        medico.setSenha("abcd");
+        medico.setCrm("8509");
+        medico.setSenha("Abcd@#123");
         medico.setPerfil("Medico");
         
         adicionar.adicionar_usuario(medico);
@@ -143,8 +203,8 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Márcio Sousa@#123");
-        medico.setCrm("0321");
-        medico.setSenha("abcd");
+        medico.setCrm("0367");
+        medico.setSenha("Abcd#@123");
         medico.setPerfil("Medico");
         
         adicionar.adicionar_usuario(medico);
@@ -158,7 +218,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("");
-        medico.setCrm("0321");
+        medico.setCrm("8512");
         medico.setSenha("Abcd%1234");
         medico.setPerfil("Medico");
         
@@ -201,7 +261,7 @@ public class TesteCadastroMedico {
         
         medico.setNome("Diego Sousa");
         medico.setCrm("123456abc");
-        medico.setSenha("abcd*&654");
+        medico.setSenha("Abcd*&654");
         medico.setPerfil("Medico");
         
         adicionar.adicionar_usuario(medico);
@@ -233,6 +293,54 @@ public class TesteCadastroMedico {
         
         medico.setNome("Diego Sousa");
         medico.setCrm("123456abc$%#");
+        medico.setSenha("Abcd*&654");
+        medico.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCRMSomenteLetras() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Diego Sousa");
+        medico.setCrm("abcdefg");
+        medico.setSenha("Abcd*&654");
+        medico.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCRMSomenteCaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Diego Sousa");
+        medico.setCrm("#@!$%");
+        medico.setSenha("Abcd*&654");
+        medico.setPerfil("Medico");
+        
+        adicionar.adicionar_usuario(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCRMSomenteLetrasECaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Diego Sousa");
+        medico.setCrm("abcd#@!$%");
         medico.setSenha("Abcd*&654");
         medico.setPerfil("Medico");
         
@@ -326,7 +434,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("6734");
         medico.setSenha("abcdefghij");
         medico.setPerfil("Medico");
         
@@ -342,7 +450,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("6458");
         medico.setSenha("12345678");
         medico.setPerfil("Medico");
         
@@ -358,7 +466,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("2470");
         medico.setSenha("@#$%&*!##");
         medico.setPerfil("Medico");
         
@@ -374,7 +482,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("0189");
         medico.setSenha("abcde@#$");
         medico.setPerfil("Medico");
         
@@ -390,7 +498,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("4893");
         medico.setSenha("12345678@#$");
         medico.setPerfil("Medico");
         
@@ -406,7 +514,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("2956");
         medico.setSenha("12345678abcd");
         medico.setPerfil("Medico");
         
@@ -422,7 +530,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("0548");
         medico.setSenha("ABC123@#$");
         medico.setPerfil("Medico");
         
@@ -438,7 +546,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("8765");
+        medico.setCrm("9056");
         medico.setSenha("ABC123@#$");
         medico.setPerfil("Medico");
         
@@ -454,7 +562,7 @@ public class TesteCadastroMedico {
         Medico medico = new Medico();
         
         medico.setNome("Fabrício Sousa");
-        medico.setCrm("49632");
+        medico.setCrm("4906");
         medico.setSenha("");
         medico.setPerfil("Medico");
         
@@ -469,8 +577,8 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setNome("Bruno");
-        medico.setCrm("0987");
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("6804");
         medico.setSenha("Abcd%$#2134");
         medico.setPerfil("Medico");
         
@@ -495,10 +603,26 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setNome("Bruno");
-        medico.setCrm("3678");
-        medico.setSenha("abcd$%4567");
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("0654");
+        medico.setSenha("Abcd$%4567");
         medico.setPerfil("Administrador");
+        
+        adicionar.adicionar_usuario(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilComNumeroECaracteresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("946823");
+        medico.setSenha("Abcd$%4567");
+        medico.setPerfil("Medico123@#$");
         
         adicionar.adicionar_usuario(medico);
         
@@ -511,8 +635,8 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setNome("Bruno");
-        medico.setCrm("3678");
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("7456");
         medico.setSenha("abcd$%4567");
         medico.setPerfil("Medico123");
         
@@ -527,9 +651,9 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setNome("Bruno");
-        medico.setCrm("3678");
-        medico.setSenha("abcd$%4567");
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("2378");
+        medico.setSenha("Abcd$%4567");
         medico.setPerfil("Medico@#$");
         
         adicionar.adicionar_usuario(medico);
@@ -537,16 +661,48 @@ public class TesteCadastroMedico {
     }
     
     @Test(expected = Exception.class)
-    public void testePerfilComNumeroECaracteresEspeciais() throws Exception{
+    public void testePerfilSomenteCaracteresEspeciais() throws Exception{
         
         Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
         
         Medico medico = new Medico();
         
-        medico.setNome("Bruno");
-        medico.setCrm("3678");
-        medico.setSenha("abcd$%4567");
-        medico.setPerfil("Medico123@#$");
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("63902");
+        medico.setSenha("Abc#$av123");
+        medico.setPerfil("@#$!$%&");
+        
+        adicionar.adicionar_usuario(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilSomenteNumeros() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("684532");
+        medico.setSenha("Aabcd$%4567");
+        medico.setPerfil("1234567");
+        
+        adicionar.adicionar_usuario(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testePerfilSomenteNumerosECaraceresEspeciais() throws Exception{
+        
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("8365");
+        medico.setSenha("Aabcd$%4567");
+        medico.setPerfil("1234567#$@!");
         
         adicionar.adicionar_usuario(medico);
         
@@ -559,9 +715,9 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setNome("Bruno");
-        medico.setCrm("098765");
-        medico.setSenha("abcd%$¨434");
+        medico.setNome("Bruno Alcântra");
+        medico.setCrm("85648233");
+        medico.setSenha("Abcd%$¨434");
         medico.setPerfil("");
         
         adicionar.adicionar_usuario(medico);
@@ -670,6 +826,54 @@ public class TesteCadastroMedico {
         
     }
     
+    @Test(expected = Exception.class)
+    public void testeFone_FixoSomenteLetras() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setId(8);
+        medico.setFone_fixo("abcdefghij");
+        medico.setFone_celular("89999424563");
+        medico.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoSomenteCaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setId(9);
+        medico.setFone_fixo("@#$%&*!@#$");
+        medico.setFone_celular("89999424563");
+        medico.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeFone_FixoSomenteLetrasECaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setId(10);
+        medico.setFone_fixo("ab$%fg$%!@");
+        medico.setFone_celular("89999424563");
+        medico.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(medico);
+        
+    }
+    
     @Test
     public void Celular_Valido() throws Exception {
         //teste de medico e enfermeiro validos (10 digitos fixo,11 digitos  celular)
@@ -677,7 +881,7 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(8);
+        medico.setId(11);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("89999999429");
         medico.setEndereco("Bairro Junco");
@@ -699,7 +903,7 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(9);
+        medico.setId(12);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("899994668481");
         medico.setEndereco("Paraibinha");
@@ -715,7 +919,7 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(10);
+        medico.setId(13);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("8999999942");
         medico.setEndereco("Mesquita");
@@ -731,7 +935,7 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(11);
+        medico.setId(14);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("8999942abcd");
         medico.setEndereco("Mesquita");
@@ -747,8 +951,9 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(12);
-        medico.setFone_fixo("8934222@#!$");
+        medico.setId(15);
+        medico.setFone_fixo("8934222233");
+        medico.setFone_celular("8999942@#!$");
         medico.setEndereco("Mesquita");
         
         adicionar.adicionar_endereco(medico);
@@ -762,8 +967,57 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(13);
-        medico.setFone_fixo("8934222ab!$");
+        medico.setId(16);
+        medico.setFone_fixo("8934222433");
+        medico.setFone_celular("89999ab@#");
+        medico.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularSomenteLetras() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setId(17);
+        medico.setFone_fixo("8934222433");
+        medico.setFone_celular("abcdefghijk");
+        medico.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularSomenteCaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setId(18);
+        medico.setFone_fixo("8934222@#!$");
+        medico.setFone_celular("!@#$%&*!@#$");
+        medico.setEndereco("Mesquita");
+        
+        adicionar.adicionar_endereco(medico);
+        
+    }
+    
+    @Test(expected = Exception.class)
+    public void testeCelularSomenteLetrasECaracteresEspeciais() throws Exception{
+             //teste de medico e enfermeiro Invalidos (9 digitos fixo,10 digitos celular)estes testes de valores invalidos sao de limite para os dois
+        Tela_Administrador_Adicionar_Medico adicionar = new Tela_Administrador_Adicionar_Medico();
+        
+        Medico medico = new Medico();
+        
+        medico.setId(19);
+        medico.setFone_fixo("8934222433");
+        medico.setFone_celular("abcdefg!@#$");
         medico.setEndereco("Mesquita");
         
         adicionar.adicionar_endereco(medico);
@@ -777,7 +1031,7 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(14);
+        medico.setId(20);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("");
         medico.setEndereco("Mesquita");
@@ -793,7 +1047,7 @@ public class TesteCadastroMedico {
         
         Medico medico = new Medico();
         
-        medico.setId(15);
+        medico.setId(21);
         medico.setFone_fixo("8934222433");
         medico.setFone_celular("89999841001");
         medico.setEndereco("");
