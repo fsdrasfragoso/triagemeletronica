@@ -18,7 +18,9 @@ import java.sql.SQLException;
 
  // Bruno executa teste do repositorio! 
 
-// acho que saquei qual o problema com o git 
+//problemas com os commits ainda não resolvido 
+
+
 // Diego testando repositório 
 public class Conexao {
 
