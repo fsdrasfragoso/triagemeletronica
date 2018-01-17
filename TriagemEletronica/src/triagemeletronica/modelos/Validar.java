@@ -157,7 +157,7 @@ public class Validar {
 		
 		this.fone_fixoMed = fone_fixoMed;
 		
-		Pattern p = Pattern.compile("[A-Za-z!@#$%¨&*;.,]");
+		Pattern p = Pattern.compile("[A-Za-z!@#$%¨&*;.,-]");
 		Matcher m = p.matcher(fone_fixoMed);
 		
 		if(m.find()){
@@ -262,20 +262,30 @@ public class Validar {
 	}
         
         public boolean checkSenha(String senha){
-		
-		this.senha = senha;
-		
-		Pattern p = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z#!@$%¨&*?+=.,:;\\d]{8,}$");
-		Matcher m = p.matcher(senha);
-                
-                if(m.find()){
-                    return true;
-                }else{
-                    return false;
+
+            boolean achouNumero = false;
+            boolean achouMaiuscula = false;
+            boolean achouMinuscula = false;
+            boolean achouSimbolo = false;
+    
+            for (char c : senha.toCharArray()) {
+                if (c >= '0' && c <= '9') {
+                    achouNumero = true;
+                } else if (c >= 'A' && c <= 'Z') {
+                    achouMaiuscula = true;
+                } else if (c >= 'a' && c <= 'z') {
+                    achouMinuscula = true;
+                } else {
+                    achouSimbolo = true;
                 }
+            }
+            
+            if(achouNumero == true && achouMaiuscula == true && achouMinuscula == true && achouSimbolo){
+                return true;
+            }else{
+                return false;
+            }
+            
         }
-}
-/**
- *
- * @author lenovo user
- */
+        
+    }    

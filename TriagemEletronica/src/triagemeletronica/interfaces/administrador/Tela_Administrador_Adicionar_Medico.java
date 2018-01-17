@@ -65,8 +65,8 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
                 throw new Exception();
             }
 
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+            throw e;
         }catch (Exception ex){
             //JOptionPane.showMessageDialog(null, ex);
             throw ex;
@@ -147,7 +147,9 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
         Validar validar = new Validar();
         boolean nulos = validar.camposNulosMedEnd(medico);
         boolean fone_fixo10Digitos = validar.checkFone_FixoMed10DigitosOuNulo(medico.getFone_fixo());
+        boolean fone_fixoValido = validar.checkFone_FixoMed_valido(medico.getFone_fixo());
         boolean celular11Digitos = validar.checkCelularMed11Digitos(medico.getFone_celular());
+        boolean celularValido = validar.checkCelularMed_valido(medico.getFone_celular());
         
         try {
             
@@ -157,7 +159,7 @@ public class Tela_Administrador_Adicionar_Medico extends javax.swing.JInternalFr
             pst2.setString(3, medico.getFone_celular());
             pst2.setString(4, medico.getEndereco());        
                 
-            if(nulos == true && fone_fixo10Digitos == true && celular11Digitos == true){
+            if(nulos == true && fone_fixoValido == false && fone_fixo10Digitos == true && celular11Digitos == true && celularValido == false){
                 pst2.executeUpdate();
                 //JOptionPane.showMessageDialog(null, "Dados de endereço e telefone do médico cadastrados com sucesso!"); 
             
