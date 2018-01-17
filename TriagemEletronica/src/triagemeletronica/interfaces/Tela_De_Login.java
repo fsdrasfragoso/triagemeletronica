@@ -11,10 +11,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import triagemeletronica.interfaces.Tela_Do_Administrador;
 import triagemeletronica.interfaces.Tela_Do_Administrador;
 import triagemeletronica.interfaces.enfermeiro.Tela_Do_Enfermeiro;
+import triagemeletronica.interfaces.medico.Tela_Do_Medico;
+import triagemeletronica.paciente.Triagem;
 
 /**
  *
@@ -62,14 +65,15 @@ public class Tela_De_Login extends javax.swing.JFrame {
                 
                      Tela_Do_Enfermeiro.lblUsuario.setText(rs.getString(2));
                      Tela_Do_Enfermeiro.txtNumID.setText(rs.getString(1));
+                    
                 }else{
                 
-      //          Tela_Do_Medico tm = new Tela_Do_Medico();
-        //        tm.setVisible(true);
-        //        this.dispose();
+                Tela_Do_Medico tm = new Tela_Do_Medico();
+                tm.setVisible(true);
+                this.dispose();
                 
-        //        Tela_Do_Medico.lblUsuario.setText(rs.getString(2));
-        //        Tela_Do_Administrador.txtNumID.setText(rs.getString(1));
+                Tela_Do_Medico.lblUsuario.setText(rs.getString(2));
+                Tela_Do_Medico.txtNumID.setText(rs.getString(1));
                 }      
                 conexao.close();
                 
