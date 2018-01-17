@@ -9,6 +9,9 @@ package triagemeletronica.paciente;
  *
  * @author Esdras Fragoso
  */
+
+
+// 
 public class Paciente {
     private String nome;
     private String rua;
