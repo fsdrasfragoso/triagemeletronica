@@ -32,7 +32,7 @@ public class Triagem  extends JFrame{
     public javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField diastola;
 
-    
+     private javax.swing.JCheckBox jCheckBoxDiabetes;
     private javax.swing.JToggleButton jBVerificar;
     private javax.swing.JButton jButtonTriagem;
     private javax.swing.JCheckBox jCheckBoxAlergia;
@@ -204,7 +204,7 @@ public Triagem() {
         jTextAreaMedicamento = new javax.swing.JTextArea();
          jLPESO = new javax.swing.JLabel();
         jTPESO = new javax.swing.JTextField();
-        
+         jCheckBoxDiabetes = new javax.swing.JCheckBox();
         
         
         
@@ -522,6 +522,10 @@ public Triagem() {
        
                 setTria(true);
                 
+         jCheckBoxDiabetes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxDiabetes.setText("SIM");
+        
+                
         jComboBoxSEXO.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jComboBoxSEXO.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMININO" }));
 
@@ -741,6 +745,8 @@ public Triagem() {
         jLPESO.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLPESO.setText("Informe o Peso do Paciente");
         
+         jCheckBoxDiabetes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxDiabetes.setText("SIM");
         
 
         jLCEP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -909,7 +915,7 @@ public Triagem() {
             }      
         
         } catch (SQLException ex) {
-            Logger.getLogger(triagemeletronica.paciente.Triagem.class.getName()).log(Level.SEVERE, null, ex);
+           // Logger.getLogger(triagemeletronica.paciente.Triagem.class.getName()).log(Level.SEVERE, null, ex);
         
         }
                    
@@ -1004,8 +1010,7 @@ public Triagem() {
             }
         });
        
-        
-             javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+     javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1073,11 +1078,9 @@ public Triagem() {
                                     .addComponent(jTFQual)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBoxDiabetes)
+                                .addGap(23, 23, 23)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField4))
@@ -1229,10 +1232,9 @@ public Triagem() {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxDiabetes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -1316,12 +1318,11 @@ public Triagem() {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
-
-        
+       
         bindingGroup.bind();
          pack();
         setVisible(true);
@@ -1839,7 +1840,30 @@ public void atualiza(String nome, String sexo, String rg, String altura, String 
            cor = 5; 
        }
        t.p().setCor(cor);
-       t.p().setDiabetico(true);
+       t.p().setDiabetico(jCheckBoxDiabetes.getVerifyInputWhenFocusTarget());
+       t.p().setDores(jCheckBoxDores.getVerifyInputWhenFocusTarget());
+       t.p().setAlergia(jCheckBoxAlergia.getVerifyInputWhenFocusTarget());
+       t.p().setDiastola(Integer.parseInt(diastola.getText()));
+       t.p().setSistole(Integer.parseInt(Sistole.getText()));
+       t.p().setNumero(Integer.parseInt(n));
+       t.p().setRg(rg);
+       t.p().setTemperatura(Float.parseFloat(jTextFieldTemperatura.getText()));
+       t.p().setZona(zona);
+       t.p().setTesteClicemia(Integer.parseInt(jTextField4.getText()));
+       if(jCheckBoxDedecou.getVerifyInputWhenFocusTarget()){
+           t.p().setDiarreia(Integer.parseInt(jTextFieldDefecou.getText()));
+       }else{
+           t.p().setDiarreia(0); 
+       }
+       if(jCheckBoxVomito.getVerifyInputWhenFocusTarget()){
+           t.p().setVomito(Integer.parseInt(jTextFieldVomitou.getText()));
+           
+       }else{
+           t.p().setVomito(0); 
+       }
+       
+       
+       
         t.jTFNome.setText("");
         t.jTFCEP.setText("");
        t.jTFRG.setText("");

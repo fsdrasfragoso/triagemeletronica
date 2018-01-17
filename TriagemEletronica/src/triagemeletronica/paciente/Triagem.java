@@ -66,8 +66,6 @@ public class Triagem extends javax.swing.JFrame {
         jLZona = new javax.swing.JLabel();
         jComboBoxZona = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         jCheckBoxAlergia = new javax.swing.JCheckBox();
         jLQual = new javax.swing.JLabel();
@@ -122,6 +120,7 @@ public class Triagem extends javax.swing.JFrame {
         jTextAreaMedicamento = new javax.swing.JTextArea();
         jLPESO = new javax.swing.JLabel();
         jTPESO = new javax.swing.JTextField();
+        jCheckBoxDiabetes = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,17 +190,6 @@ public class Triagem extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("O paciente tem diabetes:");
-
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jRadioButton1.setText("SIM");
-
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jRadioButton2.setText("NÂO");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("O paciente possui alergias ?");
@@ -366,6 +354,9 @@ public class Triagem extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxDiabetes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jCheckBoxDiabetes.setText("SIM");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -434,11 +425,9 @@ public class Triagem extends javax.swing.JFrame {
                                     .addComponent(jTFQual)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBoxDiabetes)
+                                .addGap(23, 23, 23)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField4))
@@ -590,10 +579,9 @@ public class Triagem extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxDiabetes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -677,7 +665,7 @@ public class Triagem extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -710,10 +698,6 @@ public class Triagem extends javax.swing.JFrame {
     private void jTextFieldTemperaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTemperaturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTemperaturaActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     private void jTFRGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFRGActionPerformed
         // TODO add your handling code here:
@@ -785,17 +769,7 @@ public class Triagem extends javax.swing.JFrame {
                 jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
                 jLabel2.setText("O paciente tem diabetes:");
 
-                jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-                jRadioButton1.setText("SIM");
-
-                jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-                jRadioButton2.setText("NÂO");
-                jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        jRadioButton2ActionPerformed(evt);
-                    }
-                });
-
+                  
                 jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
                 jLabel3.setText("O paciente possui alergias ?");
 
@@ -977,6 +951,7 @@ public class Triagem extends javax.swing.JFrame {
     private javax.swing.JButton jButtonTriagem;
     private javax.swing.JCheckBox jCheckBoxAlergia;
     private javax.swing.JCheckBox jCheckBoxDedecou;
+    private javax.swing.JCheckBox jCheckBoxDiabetes;
     private javax.swing.JCheckBox jCheckBoxDores;
     private javax.swing.JCheckBox jCheckBoxMedicamento;
     private javax.swing.JCheckBox jCheckBoxSangrando;
@@ -1025,8 +1000,6 @@ public class Triagem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelVezesVomitou;
     private javax.swing.JLabel jLabelVomitou;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFBairro;

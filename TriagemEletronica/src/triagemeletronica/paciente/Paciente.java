@@ -35,7 +35,15 @@ public class Paciente {
     private int cor; 
     private int diarreia; 
     private int vomito; 
- 
+    private int testeClicemia; 
+
+    public int getTesteClicemia() {
+        return testeClicemia;
+    }
+
+    public void setTesteClicemia(int testeClicemia) {
+        this.testeClicemia = testeClicemia;
+    }
     
     public Paciente() {
         
