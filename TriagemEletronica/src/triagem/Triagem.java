@@ -270,8 +270,14 @@ public Triagem() {
                 
                 p.setDiastola(Float.parseFloat(diastola.getText()));
                 p.setDores(jCheckBoxDores.isSelected());
-                p.setResultado_test_clicemia(Float.parseFloat(jTextField4.getText()));
+                //p.setResultado_test_clicemia(Float.parseFloat(jTextField4.getText()));
                 p.setSistole(Float.parseFloat(Sistole.getText()));
+                
+                if(jCheckBoxDiabetes.isSelected()){
+               p.setResultado_test_clicemia(Float.parseFloat(jTextField4.getText()));
+                }else{
+                    p.setResultado_test_clicemia(-1);
+                }
                 p.setTemperatura(Float.parseFloat(jTextFieldTemperatura.getText()));
                 p.setTesteClicemia(Integer.parseInt(jTextField4.getText()));
                 if(jCheckBoxVomito.isSelected()){
@@ -307,6 +313,18 @@ public Triagem() {
         if(!jTextNumeroCartaoSUS.getText().trim().equals("")){  
         if(!jTextFieldProcedencia.getText().trim().equals("") && !jTextPaneMotivoDaVinda.getText().trim().equals("")){
             try {
+                
+                
+               p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+               
+               p.setProcedencia(jTextFieldProcedencia.getText());
+  
+               
+              a.Cadastro(p);
+              
+                
+                
+                
                 atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
@@ -354,17 +372,18 @@ public Triagem() {
      if(jTextFieldRua.getText().trim().equals("")){
       if(jTFBairro.getText().equals("")){
           try {
-
-               p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
+  
+   p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
   p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
    
   p.setRua((String)jComboBoxRua.getSelectedItem());
   p.setProcedencia(jTextFieldProcedencia.getText());
-   
-             a.Cadastro(p);
-
-
-              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+  
+              a.Cadastro(p);           
+              
+              
+              
+   cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
    
 
               
@@ -377,14 +396,17 @@ public Triagem() {
           try {
   
               
-              p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
+   p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
   p.setBairro(jTFBairro.getText()); 
    
   p.setRua((String)jComboBoxRua.getSelectedItem());
   p.setProcedencia(jTextFieldProcedencia.getText());
   
-              a.Cadastro(p);
-                           
+              a.Cadastro(p);           
+              
+              
+              
+              
               
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
           
@@ -450,6 +472,17 @@ public Triagem() {
        if(jTextFieldRua.getText().trim().equals("")){
       if(jTFBairro.getText().equals("")){
           try {
+             
+              
+              
+   p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+  p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
+   
+  p.setRua((String)jComboBoxRua.getSelectedItem());
+  p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+              a.Cadastro(p);           
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
               
               // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
@@ -459,6 +492,22 @@ public Triagem() {
       }else{
 
           try {
+             
+              
+              
+   p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+  p.setBairro(jTFBairro.getText()); 
+   
+  p.setRua((String)jComboBoxRua.getSelectedItem());
+  p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+              a.Cadastro(p);           
+              
+              
+              
+              
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
           } catch (SQLException ex) {
               Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
@@ -470,6 +519,20 @@ public Triagem() {
        
          if(jTFBairro.getText().equals("")){
           try {
+              
+              
+              
+              
+   p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+  p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
+   
+  p.setRua(jTextFieldRua.getText());
+  p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+              a.Cadastro(p);           
+              
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
               
               // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
@@ -479,6 +542,20 @@ public Triagem() {
       }else{
 
           try {
+           
+              
+              
+   p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+  p.setBairro(jTFBairro.getText()); 
+   
+  p.setRua(jTextFieldRua.getText());
+  p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+              a.Cadastro(p);           
+              
+              
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
           } catch (SQLException ex) {
               Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
@@ -496,6 +573,16 @@ public Triagem() {
        if(jTextFieldRua.getText().trim().equals("")){
       if(jTFBairro.getText().equals("")){
           try {
+              
+               p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
+               p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
+   
+               p.setRua((String)jComboBoxRua.getSelectedItem());
+               p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+               
+              a.Cadastro(p);
+               
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
               
               // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
@@ -505,6 +592,17 @@ public Triagem() {
       }else{
 
           try {
+             
+              p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
+               p.setBairro(jTFBairro.getText()); 
+   
+               p.setRua((String)jComboBoxRua.getSelectedItem());
+               p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+               
+              a.Cadastro(p);
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
           } catch (SQLException ex) {
               Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
@@ -516,6 +614,17 @@ public Triagem() {
        
          if(jTFBairro.getText().equals("")){
           try {
+            
+              p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
+               p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
+   
+               p.setRua(jTextFieldRua.getText());
+               p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+               
+              a.Cadastro(p);
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
               
               // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
@@ -525,6 +634,18 @@ public Triagem() {
       }else{
 
           try {
+              
+               p.setMotivo_da_vinda(jTextPaneMotivoDaVinda.getText());
+               p.setBairro(jTFBairro.getText()); 
+   
+               p.setRua(jTextFieldRua.getText());
+               p.setProcedencia((String)jComboBoxProcedencia.getSelectedItem());
+  
+               
+              a.Cadastro(p);
+              
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
           } catch (SQLException ex) {
               Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
@@ -546,6 +667,18 @@ public Triagem() {
          if(jTextFieldRua.getText().trim().equals("")){
       if(jTFBairro.getText().equals("")){
           try {
+              
+              p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+               p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
+   
+               p.setRua((String)jComboBoxRua.getSelectedItem());
+               p.setProcedencia(jTextFieldProcedencia.getText());
+  
+               
+              a.Cadastro(p);
+              
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
               
               // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
@@ -555,6 +688,18 @@ public Triagem() {
       }else{
 
           try {
+              
+              
+              p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+               p.setBairro(jTFBairro.getText()); 
+   
+               p.setRua((String)jComboBoxRua.getSelectedItem());
+               p.setProcedencia(jTextFieldProcedencia.getText());
+  
+               
+              a.Cadastro(p);
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
           } catch (SQLException ex) {
               Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
@@ -566,6 +711,21 @@ public Triagem() {
        
          if(jTFBairro.getText().equals("")){
           try {
+              
+              
+              p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+               p.setBairro((String)jComboBoxBairro.getSelectedItem()); 
+   
+               p.setRua(jTextFieldRua.getText());
+               p.setProcedencia(jTextFieldProcedencia.getText());
+  
+               
+              a.Cadastro(p);
+              
+              
+              
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
               
               // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
@@ -575,6 +735,20 @@ public Triagem() {
       }else{
 
           try {
+              
+              
+              p.setMotivo_da_vinda((String)jComboBoxMotivoDaVienda.getSelectedItem());
+               p.setBairro(jTFBairro.getText()); 
+   
+               p.setRua(jTextFieldRua.getText());
+               p.setProcedencia(jTextFieldProcedencia.getText());
+  
+               
+              a.Cadastro(p);
+              
+              
+              
+              
               cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
           } catch (SQLException ex) {
               Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
