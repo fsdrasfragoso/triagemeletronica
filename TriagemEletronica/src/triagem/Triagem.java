@@ -18,11 +18,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import org.jdesktop.beansbinding.BindingGroup;
+import triagemeletronica.array.ArrayPacientes;
 import triagemeletronica.conexao.Conexao;
+import triagemeletronica.paciente.Paciente;
 
 /**
  *
- * @author JOICE FRAGOSO
+ * @author Esdras Fragoso
  */
 public class Triagem  extends JFrame{
     public javax.swing.JTextField Sistole;
@@ -105,7 +107,7 @@ public class Triagem  extends JFrame{
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jLPESO;
     private javax.swing.JTextField jTPESO;
-    
+    public  ArrayPacientes a = new ArrayPacientes();
     private boolean tria; 
 
     public boolean getTria() {
@@ -119,8 +121,8 @@ public class Triagem  extends JFrame{
 
 
 public Triagem() {
-    
-        Connection conexao = Conexao.getConnection();
+     
+      //  Connection conexao = Conexao.getConnection();
         BindingGroup bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
        
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -1758,12 +1760,55 @@ public static void cadastrar(String nome, String sexo, String rg, String altura,
     
 }
 
+  public Paciente p (){
+      Paciente p = new Paciente();
+      return p; 
+  }  
+
+public static String selectIdBairro(String id) throws SQLException{
+   String sql = "SELECT id_bairro FROM `rua_has_bairro` WHERE id='"+id+"';";
+    Conexao c = new Conexao();
+       Connection con = c.getConnection();
+        
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+     
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("Nome");
+                
+
+        }
+        
+        return NomeBairro(r);
+
+    
+}  
+  
+  
+public static String NomeBairro(String id) throws SQLException{
+   String sql = "SELECT Nome FROM `bairro` WHERE Id='"+id+"';"; 
+          Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+     
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("Nome");
+                
+
+        }
+        
+        return r;
 
 
+}
 
 
-
-public static void atualiza(String nome, String sexo, String rg, String altura, String peso, String zona, String cep, String n, String procedencia, String motivo, String cartaoSUS) throws SQLException{
+public void atualiza(String nome, String sexo, String rg, String altura, String peso, String zona, String cep, String n, String procedencia, String motivo, String cartaoSUS) throws SQLException{
     Triagem t = new Triagem();
     double p = Double.parseDouble(peso);
  //   String sql = "UPDATE `paciente` SET `nome` = 'Joice Barbosa Fragoso', `sexo` = 'FEMININO', `rg` = '2005', `Altura` = '1.60', `Peso` = '66', `zona` = 'URBANA', `cep` = '63870000', `numero` = '10' WHERE `paciente`.`cartao_sus` = '2' AND `paciente`.`procedencia_id` = 1 AND `paciente`.`motivo_da_vinda_Id` = 1; ";
@@ -1774,7 +1819,27 @@ public static void atualiza(String nome, String sexo, String rg, String altura, 
        PreparedStatement stmt = con.prepareStatement(sql); 
        stmt.execute();
        stmt.close();
-        
+       
+       t.p().setNome(nome);
+       t.p().setCartao_sus(cartaoSUS);
+       t.p().setCidade("Boa Viagem");
+       t.p().setCep(cep);
+       int cor = 7;
+      String orc = (String) t.jComboBoxCor.getSelectedItem(); ;
+             //"Vermelho", "Laranja", "Amarelo", "Verde", "Azual"
+       if(orc.equals("Vermelho")){
+           Math.pow(cor,5); 
+       }else if(orc.equals("Laranja")){
+           Math.pow(cor, 4);
+       }else if(orc.equals("Amarelo")){
+           Math.pow(cor,3);
+       }else if(orc.equals("Verde")){
+           Math.pow(cor, 1);
+       }else{
+           cor = 5; 
+       }
+       t.p().setCor(cor);
+       t.p().setDiabetico(true);
         t.jTFNome.setText("");
         t.jTFCEP.setText("");
        t.jTFRG.setText("");
@@ -1793,8 +1858,10 @@ public static void atualiza(String nome, String sexo, String rg, String altura, 
         t.jTextFieldProcedencia.setText("");
         t.jTPESO.setText("");
         t.jTextPaneMotivoDaVinda.setText("");
-   
-   
+           
+      
+        
+        
    
 }
 

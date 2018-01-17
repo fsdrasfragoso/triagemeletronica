@@ -1,3 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package triagemeletronica.array;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import javafx.print.Collation;
@@ -18,8 +25,7 @@ public class ArrayPacientes {
     //Imprimer a ficha dos pacietnes que vão serem atendidos. 
     public void imprimirtodosprod(){
          for(int i=0;i<ListaDePaciente.size();i++){
-        //     JOptionPane.showMessageDialog(null,"Nome Paciente"+ListaDePaciente.get(i).getNome()+"\n Numero cartão SUS "+ListaDePaciente.get(i).getCartaosus()+"\n CPF do Paciente ->"+ListaDePaciente.get(i).getCpf()+"\n O RG do Paciente e:"+ListaDePaciente.get(i).getRg()+"\n a idade do paciente e:"+ ListaDePaciente.get(i).getIdade()+"\n O Sintoma do Paciente é"+ListaDePaciente.get(i).getSintomas()+"\n O PACIENTE VOMITOU?"+ListaDePaciente.get(i).getVomito()+"\n QUAL A TEMPERATURA DO PACIENTE?"+ListaDePaciente.get(i).getTemperatua() );
-         
+            
    
          }
          
@@ -29,8 +35,8 @@ public class ArrayPacientes {
      public void ImprimirQauntidadePaciente(){
        JOptionPane.showMessageDialog(null, "Existem\t"+ListaDePaciente.size()+"\t na fila esperando para ser atendidos");
     } 
-     
      /*
+     
      // imprimir a ordem em que os pacientes vão ser atendidos 
      public void imprimirFila(){
          // auxilar para ciaração da fila
@@ -86,42 +92,41 @@ public class ArrayPacientes {
             Ordenar o = new Ordenar (); 
             o.insertionSort(ListaPaciente, ListaDePaciente); 
              for(int i = 0; i<ListaDePaciente.size();i++){
-                 JOptionPane.showMessageDialog(null,"Nome Paciente"+ListaDePaciente.get(i).getNome()+"\n Numero cartão SUS "+ListaDePaciente.get(i).getCartaosus()+"\n CPF do Paciente ->"+ListaDePaciente.get(i).getCpf()+"\n O RG do Paciente e:"+ListaDePaciente.get(i).getRg()+"\n a idade do paciente e:"+ ListaDePaciente.get(i).getIdade()+"\n O Sintoma do Paciente é"+ListaDePaciente.get(i).getSintomas()+"\n O PACIENTE VOMITOU?"+ListaDePaciente.get(i).getVomito()+"\n QUAL A TEMPERATURA DO PACIENTE?"+ListaDePaciente.get(i).getTemperatua() );
+         //        JOptionPane.showMessageDialog(null,"Nome Paciente"+ListaDePaciente.get(i).getNome()+"\n Numero cartão SUS "+ListaDePaciente.get(i).getCartaosus()+"\n CPF do Paciente ->"+ListaDePaciente.get(i).getCpf()+"\n O RG do Paciente e:"+ListaDePaciente.get(i).getRg()+"\n a idade do paciente e:"+ ListaDePaciente.get(i).getIdade()+"\n O Sintoma do Paciente é"+ListaDePaciente.get(i).getSintomas()+"\n O PACIENTE VOMITOU?"+ListaDePaciente.get(i).getVomito()+"\n QUAL A TEMPERATURA DO PACIENTE?"+ListaDePaciente.get(i).getTemperatua() );
          
              }
      
              
      }
-    
+    */
      // Nessa parte o médifo visualiuza queme ele vai consultar e o sistema excluir da lista dos pacientes na fila 
      public void ConsultrPaciente(){
            // informações previs do paciente 
-         JOptionPane.showMessageDialog(null, "O Paciente da vez é o senho: /t"+ ListaDePaciente.get(0).getNome()+"Que esta acintomatico: \n"+ListaDePaciente.get(0).getSintomas());
+       //  JOptionPane.showMessageDialog(null, "O Paciente da vez é o senho: /t"+ ListaDePaciente.get(0).getNome()+"Que esta acintomatico: \n"+ListaDePaciente.get(0).getSintomas());
                      int resposta = JOptionPane.showConfirmDialog(null,"Deseja Consultar o pacietne agora?"); 
-                            if(resposta == 0){
+                         if(resposta == 0){
                         
                                 ListaDePaciente.remove(0); 
-                        JOptionPane.showMessageDialog(null, "Boa Consulta");
+      ///                  JOptionPane.showMessageDialog(null, "Boa Consulta");
               }else{
-                        MENU m = new MENU();
-                        m.munu();
+    //                    MENU m = new MENU();
+      //                  m.munu();
                           
                           
               }  
 
      
-     } 
-*/
+     }
    
  // Buscar Pacientes     
      public void buscar(String palavra){
          for(int i = 0;i<ListaDePaciente.size();i++){
-       //      if(ListaDePaciente.get(i).getNome().equals(palavra)||ListaDePaciente.get(i).getCpf().equals(palavra)||ListaDePaciente.get(i).getRg().equals(palavra)||ListaDePaciente.get(i).getCartaosus().equals(palavra)){
-         //        JOptionPane.showMessageDialog(null,"Paciente nuemro: \t"+i+"\n O nome do Paciente é: \t"+ListaDePaciente.get(i).getNome()+"\n Sintoms: \t"+ListaDePaciente.get(i).getSintomas());
+        //     if(ListaDePaciente.get(i).getNome().equals(palavra)||ListaDePaciente.get(i).getCpf().equals(palavra)||ListaDePaciente.get(i).getRg().equals(palavra)||ListaDePaciente.get(i).getCartaosus().equals(palavra)){
+          //       JOptionPane.showMessageDialog(null,"Paciente nuemro: \t"+i+"\n O nome do Paciente é: \t"+ListaDePaciente.get(i).getNome()+"\n Sintoms: \t"+ListaDePaciente.get(i).getSintomas());
              }
          }
      }
-/*     
+     /*
      public void ALTERAR(String palavra){
          Alterar a = new Alterar();
          for(int i = 0;i<ListaDePaciente.size();i++){
@@ -137,13 +142,11 @@ public class ArrayPacientes {
      public void remover(String palavra){
          for(int i = 0;i<ListaDePaciente.size();i++){
              if(ListaDePaciente.get(i).getNome().equals(palavra)||ListaDePaciente.get(i).getCpf().equals(palavra)||ListaDePaciente.get(i).getRg().equals(palavra)||ListaDePaciente.get(i).getCartaosus().equals(palavra)){
-                 JOptionPane.showMessageDialog(null,"Paciente nuemro: \t"+i+"\n O nome do Paciente é: \t"+ListaDePaciente.get(i).getNome()+"\n Sintoms: \t"+ListaDePaciente.get(i).getSintomas());
+       //          JOptionPane.showMessageDialog(null,"Paciente nuemro: \t"+i+"\n O nome do Paciente é: \t"+ListaDePaciente.get(i).getNome()+"\n Sintoms: \t"+ListaDePaciente.get(i).getSintomas());
                    
                         ListaDePaciente.remove(i);
              
              }
          }
      }
-}
-
-*/
+}*/ 

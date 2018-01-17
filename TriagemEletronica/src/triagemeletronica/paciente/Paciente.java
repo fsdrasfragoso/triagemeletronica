@@ -35,7 +35,54 @@ public class Paciente {
     private int cor; 
     private int diarreia; 
     private int vomito; 
+ 
+    
+    public Paciente() {
+        
+        
+        
+    }
 
+    public Paciente(String nome, String rua, int numero, String bairro, String cidade, String cep, String cartao_sus, String rg, String procedencia, String motivo_da_vinda, String zona, boolean dores, float temperatura, float sistole, float diastola, boolean diabetico, float resultado_test_clicemia, boolean alergia, String resultado_alergia, int cor, int diarreia, int vomito) {
+        this.nome = nome;
+        this.rua = rua;
+        this.numero = numero;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.cep = cep;
+        this.cartao_sus = cartao_sus;
+        this.rg = rg;
+        this.procedencia = procedencia;
+        this.motivo_da_vinda = motivo_da_vinda;
+        this.zona = zona;
+        this.dores = dores;
+        this.temperatura = temperatura;
+        this.sistole = sistole;
+        this.diastola = diastola;
+        this.diabetico = diabetico;
+        this.resultado_test_clicemia = resultado_test_clicemia;
+        this.alergia = alergia;
+        this.resultado_alergia = resultado_alergia;
+        this.cor = cor;
+        this.diarreia = diarreia;
+        this.vomito = vomito;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public int getDiarreia() {
         return diarreia;
     }
@@ -213,7 +260,5 @@ public class Paciente {
         this.resultado_alergia = resultado_alergia;
     }
 
-    public Paciente() {
-    }
     
 }
