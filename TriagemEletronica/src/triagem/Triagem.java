@@ -266,26 +266,175 @@ public Triagem() {
             JOptionPane.showMessageDialog(null, "Informe o Numero do Cartão do SUS");
         }
         }else{
-                    System.out.println("Cadastrar");
-        jTFNome.setText("");
-        jTFCEP.setText("");
-        jTFRG.setText("");
-        
-        jTextFieldNumero.setText("");
-        
-        jTextAreaMedicamento.setText("");
-        jTextFieldVomitou.setText("");
-        jTFQual.setText("");
-        jTextFieldRua.setText("");
-        jTFBairro.setText("");
-        jTextField4.setText("");
-        jTextFieldRua.setText("");
-        jTextFieldAltura.setText("");
-        jTextFieldDefecou.setText("");
-        jTextFieldProcedencia.setText("");
-        jTextPaneMotivoDaVinda.setText("");
-        
-        
+         
+            if(!jTextNumeroCartaoSUS.getText().trim().equals("")){  
+               if(!jTFNome.getText().trim().equals("")){
+                if(!jTFCEP.getText().trim().equals("")){
+                 if(!jTFRG.getText().trim().equals("")){
+                  if(!jTPESO.getText().trim().equals("")){
+                   if(!jTextFieldAltura.getText().trim().equals("")){
+                    if(!jTextFieldNumero.getText().trim().equals("")){
+   if(!jTextFieldProcedencia.getText().trim().equals("") && !jTextPaneMotivoDaVinda.getText().trim().equals("")){
+     if(jTextFieldRua.getText().trim().equals("")){
+      if(jTFBairro.getText().equals("")){
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+              
+              // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }else{
+
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+
+          
+      }   
+     }else{
+       
+         if(jTFBairro.getText().equals("")){
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+              
+              // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }else{
+
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+
+          
+      }
+         
+         
+         
+         
+     }                
+   }else if(jTextFieldProcedencia.getText().trim().equals("") && jTextPaneMotivoDaVinda.getText().trim().equals("")){
+       if(jTextFieldRua.getText().trim().equals("")){
+      if(jTFBairro.getText().equals("")){
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+              
+              // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }else{
+
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+
+          
+      }   
+     }else{
+       
+         if(jTFBairro.getText().equals("")){
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+              
+              // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }else{
+
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+
+          
+      }
+         
+         
+         
+         
+     }
+       
+   }else if(!jTextFieldProcedencia.getText().trim().equals("") && jTextPaneMotivoDaVinda.getText().trim().equals("")){
+       if(jTextFieldRua.getText().trim().equals("")){
+      if(jTFBairro.getText().equals("")){
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+              
+              // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }else{
+
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua((String)jComboBoxRua.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+
+          
+      }   
+     }else{
+       
+         if(jTFBairro.getText().equals("")){
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), idProce((String)jComboBoxProcedencia.getSelectedItem()), idMotivo((String)jComboBoxMotivoDaVienda.getSelectedItem()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro((String)jComboBoxBairro.getSelectedItem(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+              
+              // atualiza(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(), (String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText());
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      }else{
+
+          try {
+              cadastrar(jTFNome.getText(),(String)jComboBoxSEXO.getSelectedItem(), jTFRG.getText(), jTextFieldAltura.getText(), jTPESO.getText(),(String)jComboBoxZona.getSelectedItem(), jTFCEP.getText(), jTextFieldNumero.getText(), cadProce(jTextFieldProcedencia.getText()), cadMotivo(jTextPaneMotivoDaVinda.getText()), jTextNumeroCartaoSUS.getText(), id_rua_has_bairro(idBairro(jTFBairro.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(),UfEstado((String)jComboBoxEstado.getSelectedItem()))), idRua(jTextFieldRua.getText(), idMunicipio((String)jComboBoxCidade.getSelectedItem(), UfEstado((String)jComboBoxEstado.getSelectedItem())))));
+          } catch (SQLException ex) {
+              Logger.getLogger(Triagem.class.getName()).log(Level.SEVERE, null, ex);
+          }
+
+          
+      }
+         
+         
+         
+         
+     }
+       
+       
+   }                              
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Informe o numero da residencia do paciente. Caso a residencia dela não tenha numero preencha com 0");
+                    }   
+                   }else{
+                       JOptionPane.showMessageDialog(null, "Informe a altura do paciente. Cuidado Lembre-se que o Sistema considera , o . na notação dos numeros decimais");
+                   }   
+                  }else{
+                     JOptionPane.showMessageDialog(null, "Informe o peso do paciente"); 
+                  }   
+                 }else{
+                     JOptionPane.showMessageDialog(null, "Informe o numero do RG do paceinte");
+                 }   
+                }else{
+                    JOptionPane.showMessageDialog(null, "Informe o numero do CEP do Paciente");
+                }   
+               }else{
+                   JOptionPane.showMessageDialog(null, "Informe o Nome completo do paciente");
+               }              
+                }else{
+                     JOptionPane.showMessageDialog(null, "Informe o numero do cartão do SUS");
+                }
+                    
                 
         
                 }
@@ -1223,8 +1372,112 @@ public static String [] Cidade(String uf) throws SQLException{
 
 
 
+public static String idRua(String nome, String idMunicipio) throws SQLException{
+     String sql = "SELECT Id FROM `rua` WHERE Nome='"+nome+"'AND municipio_Id='"+idMunicipio+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+           String r = null;
+       if (rs.next()) {            
+           r = rs.getString("Id");
+           return r;    
+
+        }else{
+           return cadastraRUA(nome, idMunicipio);
+       }
+    
+}
+
+public static String cadastraRUA(String nome, String idMunicipio) throws SQLException{
+    String sql = "INSERT INTO `rua` (`Id`, `Nome`, `municipio_Id`) VALUES (NULL, '26 de Junho', '921');";
+
+    Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+        stmt.execute();
+        stmt.close();
+        
+        return idRua(nome, idMunicipio);
+           
+
+}
 
 
+
+public static String idBairro(String nome, String idMunicipio) throws SQLException{
+     String sql = "SELECT Id FROM `bairro` WHERE Nome='"+nome+"' AND municipio_Id='"+idMunicipio+"'; ";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+           String r = null;
+       if (rs.next()) {            
+           r = rs.getString("Id");
+           return r;    
+
+        }else{
+           return cadastrarBairro(nome, idMunicipio);
+       }
+        
+    
+}
+
+ public static String cadastrarBairro(String nome, String idMunicipio)throws SQLException{
+          String sql = "INSERT INTO `bairro` (`Id`, `Nome`, `municipio_Id`) VALUES (NULL, '"+nome+"', '"+idMunicipio+"');";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+        stmt.execute();
+        stmt.close();
+        
+        return idBairro(nome, idMunicipio);
+        
+        }
+    
+ public static String UfEstado(String nome) throws SQLException{
+     String sql = "SELECT Uf FROM `estado` WHERE Nome='"+nome+"';";
+     
+     Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("Uf");
+               
+
+        }
+        
+        return r;
+ }
+ 
+
+public static String idMunicipio(String nome, String Uf ) throws SQLException{
+   String sql = "SELECT id FROM `municipio` WHERE Nome='"+nome+"' AND Uf='"+Uf+"';"; 
+     Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      
+      String r = null;
+       while (rs.next()) {            
+                r = rs.getString("id");
+               
+
+        }
+        
+        return r;
+    
+    
+}
+
+ 
+ 
+ 
 
 public static String rua(String id) throws SQLException{
     String sql = "SELECT Nome FROM `rua` WHERE id='"+id+"';";
@@ -1243,6 +1496,41 @@ public static String rua(String id) throws SQLException{
         
         return r;
 }
+
+
+public static String id_rua_has_bairro(String idBairr, String idRua) throws SQLException{
+   String sql = "SELECT id FROM `rua_has_bairro` WHERE id_rua='"+idRua+"' AND id_bairro='"+idBairr+"';";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+       ResultSet rs = stmt.executeQuery(sql);
+      
+      
+      String r = null;
+       if(rs.next()) {            
+                r = rs.getString("id");
+                return r;   
+       }else{
+           return cadastra_rua_has_bairro(idBairr, idRua); 
+       }
+        
+        
+}   
+    
+public static String cadastra_rua_has_bairro(String idBairr, String idRua) throws SQLException{
+        String sql = "INSERT INTO `rua_has_bairro` (`id`, `id_rua`, `id_bairro`) VALUES (NULL, '"+idRua+"', '"+idBairr+"');";
+       Conexao c = new Conexao();
+       Connection con = c.getConnection();
+       PreparedStatement stmt = con.prepareStatement(sql); 
+        stmt.execute();
+        stmt.close();
+        
+        return id_rua_has_bairro(idBairr,idRua);
+    
+    
+    
+}
+
 
 public String motivo(String nome) throws SQLException{
   String sql = "SELECT Id FROM `motivo_da_vinda` WHERE motivo_da_vinda='"+nome+"';";
@@ -1295,12 +1583,11 @@ public String idProce(String nome) throws SQLException{
        PreparedStatement stmt = con.prepareStatement(sql); 
        ResultSet rs = stmt.executeQuery(sql);
       
-      int i =1;
+      
       String r = null;
        while (rs.next()) {            
                 r = rs.getString("id");
-                i++;
-
+                
         }
         
         return r;
