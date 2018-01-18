@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import triagemeletronica.modelos.Medico;
+import triagemeletronica.modelos.Validar;
 
 /**
  *
@@ -25,7 +27,7 @@ public class Tela_Medico_Alterar_Dados extends javax.swing.JInternalFrame {
     PreparedStatement pst = null;
     PreparedStatement pst2 = null;
     ResultSet rs = null;
-
+    Medico medico = new Medico();
     /**
      * Creates new form Tela_Agenda_Adicionar
      */
@@ -34,45 +36,57 @@ public class Tela_Medico_Alterar_Dados extends javax.swing.JInternalFrame {
         conexao = Conexao.getConnection();
     }
         
-        private void alterar_dados_Medico(){
+        public void alterar_dados_Medico(Medico medico) throws Exception{
        
         String sql2 = "update Usuarios set nome=?,login=?,senha=? where id=?";
       
-         int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar os Dados do Usuario ", "Atenção", JOptionPane.YES_NO_OPTION);
-
-        if (confirma == JOptionPane.YES_OPTION) {
+        Validar validar = new Validar();
+        boolean nomeValido = validar.checkName(medico.getNome());
+        boolean camposNulos = validar.camposNulosAlterarMed(medico);
+        boolean senhaValida = validar.checkSenha(medico.getSenha());
         
         try {
-                        
-            pst2 = conexao.prepareStatement(sql2);
-            pst2.setString(1, txtNomeMed.getText());
-            pst2.setString(2, txtLoginMed.getText());
-            pst2.setString(3, txtSenhaMed.getText());
-            pst2.setString(4, Tela_Do_Medico.txtNumID.getText());
-       
-              if (txtNomeMed.getText().isEmpty() || txtLoginMed.getText().isEmpty() || txtSenhaMed.getText().isEmpty()) {
+            pst = conexao.prepareStatement(sql2);
+            pst.setString(1, medico.getNome());
+            pst.setString(2, medico.getCrm());
+            pst.setString(3, medico.getSenha());
+            pst.setInt(4, medico.getId());
 
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos Obrigatorios");
+            if (nomeValido == true && camposNulos == true && senhaValida == true) {
+                int add = pst.executeUpdate();
+                //JOptionPane.showMessageDialog(null, "Dados de usuário do médico cadastrados com sucesso!");
+            } else {
+                throw new Exception();
+            }
 
-            }else{
-               int add2 = pst2.executeUpdate();
-
-                if (add2 > 0) {
-                    JOptionPane.showMessageDialog(null, "Alterado Com Sucesso");
-                    
-                    txtNomeMed.setText(null);
-                    txtLoginMed.setText(null);
-                    txtSenhaMed.setText(null);
-                }
-             }
-
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (SQLException e) {
+            
+        }catch (Exception ex){
+            //JOptionPane.showMessageDialog(null, ex);
+            throw ex;
         }
-        }
+        
     }
-
-
+        
+    public Medico buscaMedico(Medico medico){
+         String sql = "select * from Usuarios where login = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, medico.getCrm());
+            rs = pst.executeQuery();
+            if(rs.next()){
+                medico.setNome(rs.getString("Nome"));
+                medico.setCrm(rs.getString("login"));
+                medico.setSenha(rs.getString("senha"));
+                medico.setPerfil(rs.getString("perfil"));
+            }
+        } catch (SQLException ex) {
+        
+        }
+         
+         return medico;
+     }
+        
     private void pesquisar() {
 
         String sql = "select  *from Usuarios where login =? And Id=?";
@@ -263,7 +277,33 @@ public class Tela_Medico_Alterar_Dados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomeMedActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        alterar_dados_Medico();
+        
+        medico.setId(Integer.parseInt(Tela_Do_Medico.txtNumID.getText()));
+        medico.setNome(txtNomeMed.getText());
+        medico.setCrm(txtLoginMed.getText());
+        medico.setSenha(txtSenhaMed.getText());
+        
+        Validar validar = new Validar();
+        boolean nomeValido = validar.checkName(medico.getNome());
+        boolean camposNulos = validar.camposNulosAlterarMed(medico);
+        boolean senhaValida = validar.checkSenha(medico.getSenha());
+        
+        if (nomeValido == true && camposNulos == true && senhaValida == true) {
+            try {
+                int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar os Dados do Usuario ", "Atenção", JOptionPane.YES_NO_OPTION);
+
+                if (confirma == JOptionPane.YES_OPTION) {
+                    alterar_dados_Medico(medico);
+                    JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
+                }
+                
+            } catch (Exception ex) {
+                Logger.getLogger(Tela_Medico_Alterar_Dados.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro ao alterar dados!");
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

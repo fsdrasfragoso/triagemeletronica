@@ -39,41 +39,39 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
     public void alterar_endereco(Medico medico) throws Exception{
        
         String sql = "update Medico set Telefone_Fixo=?,Telefone_Celular=?,Endereco=? where id=?";
-     
-        int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar esse Contato", "Atenção", JOptionPane.YES_NO_OPTION);
-
-        if (confirma == JOptionPane.YES_OPTION) {
             
             Validar validar = new Validar();
             boolean nulos = validar.camposNulosMedEnd(medico);
             boolean fone_fixo10Digitos = validar.checkFone_FixoMed10DigitosOuNulo(medico.getFone_fixo());
+            boolean fone_fixoValido = validar.checkFone_FixoMed_valido(medico.getFone_fixo());
             boolean celular11Digitos = validar.checkCelularMed11Digitos(medico.getFone_celular());
+            boolean celularValido = validar.checkCelularMed_valido(medico.getFone_celular());
         
-            try {
+        try {
             
-                pst = conexao.prepareStatement(sql);
-                pst.setString(1, medico.getFone_fixo());
-                pst.setString(2, medico.getFone_celular());
-                pst.setString(3, medico.getEndereco()); 
-                pst.setInt(4, medico.getId());
-
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, medico.getFone_fixo());
+            pst.setString(2, medico.getFone_celular());
+            pst.setString(3, medico.getEndereco()); 
+            pst.setInt(4, medico.getId());
                 
-                if(nulos == true && fone_fixo10Digitos == true && celular11Digitos == true){
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Dados do médico alterados com sucesso!"); 
-                }else{
-                    throw new Exception("Erro ao alterar dados do médico!!");
-                }
-
+            if(nulos == true && fone_fixoValido == false && fone_fixo10Digitos == true && celular11Digitos == true && celularValido == false){
+                pst.executeUpdate();
+                //JOptionPane.showMessageDialog(null, "Dados de endereço e telefone do médico cadastrados com sucesso!"); 
             
-            } catch (SQLException | HeadlessException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }catch (Exception ex){
-                JOptionPane.showMessageDialog(null, ex);
-                throw ex;
+            }else{
+                throw new Exception();
             }
             
+
+        } catch (SQLException | HeadlessException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }catch (Exception ex){
+            //JOptionPane.showMessageDialog(null, ex);
+            throw ex;
         }
+            
+        
         
     }
     
@@ -355,12 +353,30 @@ public class Tela_Administrador_Alterar_Medico extends javax.swing.JInternalFram
         medico.setFone_fixo(txtTelFixMed.getText());
         medico.setFone_celular(txtTelCelMed.getText());
         medico.setEndereco(txtEndMed.getText());
-        try {
-            alterar_endereco(medico);
-            // TODO add your handling code here:
-        } catch (Exception ex) {
-            Logger.getLogger(Tela_Administrador_Alterar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+        
+        Validar validar = new Validar();
+        boolean nulos = validar.camposNulosMedEnd(medico);
+        boolean fone_fixo10Digitos = validar.checkFone_FixoMed10DigitosOuNulo(medico.getFone_fixo());
+        boolean fone_fixoValido = validar.checkFone_FixoMed_valido(medico.getFone_fixo());
+        boolean celular11Digitos = validar.checkCelularMed11Digitos(medico.getFone_celular());
+        boolean celularValido = validar.checkCelularMed_valido(medico.getFone_celular());
+        
+        if(nulos == true && fone_fixoValido == false && fone_fixo10Digitos == true && celular11Digitos == true && celularValido == false){
+            try {
+                int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar esse Contato", "Atenção", JOptionPane.YES_NO_OPTION);
+
+                if (confirma == JOptionPane.YES_OPTION) {
+                    alterar_endereco(medico);
+                    JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!"); 
+                }    
+            } catch (Exception ex) {
+                Logger.getLogger(Tela_Administrador_Alterar_Medico.class.getName()).log(Level.SEVERE, null, ex);
+            }    
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao alterar dados!");     
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

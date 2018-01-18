@@ -64,6 +64,18 @@ public class Validar {
 		
 	}
         
+        public boolean camposNulosAlterarMed(Medico medico) {
+		
+		if(!medico.getNome().equals("") &&
+                        !medico.getCrm().equals("") &&
+                        !medico.getSenha().equals("")) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+        
         public boolean camposNulosEnf(Enfermeiro enfermeiro) {
 		
 		if(!enfermeiro.getNome().equals("") &&
