@@ -283,7 +283,10 @@ public Triagem() {
                     p.setResultado_test_clicemia(-1);
                 }
                 p.setTemperatura(Float.parseFloat(jTextFieldTemperatura.getText()));
+                if(jCheckBoxDiabetes.isSelected())
                 p.setTesteClicemia(Integer.parseInt(jTextField4.getText()));
+                else
+                 p.setTesteClicemia(0);
                 if(jCheckBoxVomito.isSelected()){
                     p.setVomito(Integer.parseInt(jTextFieldVomitou.getText()));
                 }else{
@@ -1067,6 +1070,9 @@ public Triagem() {
         jTextAreaMedicamento.setRows(5);
         jScrollPane2.setViewportView(jTextAreaMedicamento);
 
+        jLabelIdade.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelIdade.setText("Informe a Idade do Paciente:");
+        
         
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nome:");
@@ -1792,7 +1798,7 @@ public static String idRua(String nome, String idMunicipio) throws SQLException{
 }
 
 public static String cadastraRUA(String nome, String idMunicipio) throws SQLException{
-    String sql = "INSERT INTO `rua` (`Id`, `Nome`, `municipio_Id`) VALUES (NULL, '26 de Junho', '921');";
+    String sql = "INSERT INTO `rua` (`Id`, `Nome`, `municipio_Id`) VALUES (NULL, '"+nome+"', '"+idMunicipio+"');";
 
     Conexao c = new Conexao();
        Connection con = c.getConnection();
