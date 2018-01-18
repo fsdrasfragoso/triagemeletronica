@@ -38,7 +38,7 @@ public class ArrayPacientes {
      
      
      // imprimir a ordem em que os pacientes vão ser atendidos 
-     public void imprimirFila(){
+     public void Ordenar(){
      //    auxilar para ciaração da fila
          //esta arrayList vai acumular todos os daos para serem ordenados pelo
          // pelo metodo bolha 
