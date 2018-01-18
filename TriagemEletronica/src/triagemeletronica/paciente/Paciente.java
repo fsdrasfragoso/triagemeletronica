@@ -42,7 +42,16 @@ public class Paciente {
     private String medicamento; 
     private int sangrando; 
     private int trauma; 
+    private int idade; 
 
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+    
     public int getTrauma() {
         return trauma;
     }

@@ -35,11 +35,11 @@ public class ArrayPacientes {
      public void ImprimirQauntidadePaciente(){
        JOptionPane.showMessageDialog(null, "Existem\t"+ListaDePaciente.size()+"\t na fila esperando para ser atendidos");
     } 
-     /*
+     
      
      // imprimir a ordem em que os pacientes vão ser atendidos 
      public void imprimirFila(){
-         // auxilar para ciaração da fila
+     //    auxilar para ciaração da fila
          //esta arrayList vai acumular todos os daos para serem ordenados pelo
          // pelo metodo bolha 
          ArrayList<Float> ListaPaciente = new ArrayList<Float>();
@@ -47,7 +47,7 @@ public class ArrayPacientes {
          float imc; 
          for(int i=0;i<ListaDePaciente.size();i++){
              ficha = 0; 
-             imc = ListaDePaciente.get(i).getPeso()/(ListaDePaciente.get(i).getAltura());
+             imc = (float) (ListaDePaciente.get(i).getPeso()/(ListaDePaciente.get(i).getAltura()));
              //Mulher
              if(ListaDePaciente.get(i).getSexo().equals("Feminino")){
                   ficha = ficha + 1; 
@@ -73,19 +73,20 @@ public class ArrayPacientes {
              }
              ficha = ficha + ListaDePaciente.get(i).getVomito();
              ficha = ficha + ListaDePaciente.get(i).getDiarreia();
-              if(ListaDePaciente.get(i).getPrecaoarterial() == ListaDePaciente.get(i).getPrecaoarterial2()){
+              if(ListaDePaciente.get(i).getSistole() == 12){
                   ficha = 0; 
               }
               // pressão alta
-              if(ListaDePaciente.get(i).getPrecaoarterial()>=14||ListaDePaciente.get(i).getPrecaoarterial2()>=9){
-                  ficha = ficha + (2*ListaDePaciente.get(i).getPrecaoarterial()); 
+              if(ListaDePaciente.get(i).getSistole()>=14||ListaDePaciente.get(i).getDiastola()>=9){
+                  ficha = ficha + (2*ListaDePaciente.get(i).getSistole()); 
               }
             // preção baixa
-            if(ListaDePaciente.get(i).getPrecaoarterial()>=10||ListaDePaciente.get(i).getPrecaoarterial2()>=6){
-                  ficha = ficha + (9*ListaDePaciente.get(i).getPrecaoarterial()); 
+            if(ListaDePaciente.get(i).getSistole()>=10||ListaDePaciente.get(i).getDiastola()>=6){
+                  ficha = ficha + (9*ListaDePaciente.get(i).getSistole()); 
               }
                // System.out.println(ficha);
                ficha = ficha - i; 
+               ficha = ficha + ListaDePaciente.get(i).getCor() + ListaDePaciente.get(i).getSangrando() + ListaDePaciente.get(i).getTrauma() + ListaDePaciente.get(i).getVomito() + ListaDePaciente.get(i).getDiarreia(); 
              ListaPaciente.add(ficha);
          }
            // Ordenar fila de Pacientes para serem consultados por grau de necessidae
@@ -98,7 +99,7 @@ public class ArrayPacientes {
      
              
      }
-    */
+    
      // Nessa parte o médifo visualiuza queme ele vai consultar e o sistema excluir da lista dos pacientes na fila 
      public void ConsultrPaciente(){
            // informações previs do paciente 
