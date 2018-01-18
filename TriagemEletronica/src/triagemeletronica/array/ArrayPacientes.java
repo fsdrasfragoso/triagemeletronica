@@ -101,22 +101,16 @@ public class ArrayPacientes {
      }
     
      // Nessa parte o médifo visualiuza queme ele vai consultar e o sistema excluir da lista dos pacientes na fila 
-     public void ConsultrPaciente(){
+     public Paciente ConsultrPaciente(){
            // informações previs do paciente 
-       //  JOptionPane.showMessageDialog(null, "O Paciente da vez é o senho: /t"+ ListaDePaciente.get(0).getNome()+"Que esta acintomatico: \n"+ListaDePaciente.get(0).getSintomas());
-                     int resposta = JOptionPane.showConfirmDialog(null,"Deseja Consultar o pacietne agora?"); 
-                         if(resposta == 0){
-                        
-                                ListaDePaciente.remove(0); 
-      ///                  JOptionPane.showMessageDialog(null, "Boa Consulta");
-              }else{
-    //                    MENU m = new MENU();
-      //                  m.munu();
+              Paciente P = new Paciente();
+              P = ListaDePaciente.get(0);  
+                 ListaDePaciente.remove(0); 
+                                
                           
-                          
-              }  
+                
 
-     
+      return P;
      }
    
  // Buscar Pacientes     
