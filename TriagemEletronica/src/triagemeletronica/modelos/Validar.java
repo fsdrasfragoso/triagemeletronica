@@ -99,6 +99,18 @@ public class Validar {
 		
 	}
         
+        public boolean camposNulosAlterarAdm(Administrador administrador) {
+		
+		if(!administrador.getNome().equals("") &&
+                        !administrador.getLogin().equals("") &&
+                        !administrador.getSenha().equals("")) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+        
         public boolean camposNulosAlterarEnf(Enfermeiro enfermeiro) {
 		
 		if(!enfermeiro.getNome().equals("") &&

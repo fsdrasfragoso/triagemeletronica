@@ -15,6 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import triagemeletronica.interfaces.Tela_Do_Administrador;
+import triagemeletronica.modelos.Administrador;
+import triagemeletronica.modelos.Enfermeiro;
+import triagemeletronica.modelos.Validar;
 
 /**
  *
@@ -26,6 +29,7 @@ public class Tela_Administrador_Alterar_Dados extends javax.swing.JInternalFrame
     PreparedStatement pst = null;
     PreparedStatement pst2 = null;
     ResultSet rs = null;
+    Administrador administrador = new Administrador();
 
     /**
      * Creates new form Tela_Agenda_Adicionar
@@ -35,43 +39,61 @@ public class Tela_Administrador_Alterar_Dados extends javax.swing.JInternalFrame
         conexao = Conexao.getConnection();
     }
         
-        private void alterar_dados_administrador(){
+        public void alterar_dados_Administrador(Administrador administrador) throws Exception{
        
         String sql2 = "update Usuarios set nome=?,login=?,senha=? where id=?";
       
-         int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar os Dados do Usuario ", "Atenção", JOptionPane.YES_NO_OPTION);
-
-        if (confirma == JOptionPane.YES_OPTION) {
+         
+            
+            Validar validar = new Validar();
+            boolean nomeValido = validar.checkName(administrador.getNome());
+            boolean senhaValida = validar.checkSenha(administrador.getSenha());
+            boolean nulos = validar.camposNulosAlterarAdm(administrador);
         
-        try {
-                        
-            pst2 = conexao.prepareStatement(sql2);
-            pst2.setString(1, txtNomeAdm.getText());
-            pst2.setString(2, txtLoginAdm.getText());
-            pst2.setString(3, txtSenhaAdm.getText());
-            pst2.setString(4, Tela_Do_Administrador.txtNumID.getText());
-       
-              if (txtNomeAdm.getText().isEmpty() || txtLoginAdm.getText().isEmpty() || txtSenhaAdm.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(null, "Preencha todos os Campos Obrigatorios");
-
-            }else{
-               int add2 = pst2.executeUpdate();
-
-                if (add2 > 0) {
-                    JOptionPane.showMessageDialog(null, "Alterado Com Sucesso");
-                    
-                    txtNomeAdm.setText(null);
-                    txtLoginAdm.setText(null);
-                    txtSenhaAdm.setText(null);
+            try {
+            
+                pst2 = conexao.prepareStatement(sql2);
+                pst2.setString(1, administrador.getNome());
+                pst2.setString(2, administrador.getLogin());
+                pst2.setString(3, administrador.getSenha()); 
+                pst2.setInt(4, administrador.getId());
+            
+                if(nulos == true && nomeValido == true && senhaValida == true){
+                    pst2.executeUpdate();
+                    //JOptionPane.showMessageDialog(null, "Dados do enfermeiro alterados com sucesso!"); 
+            
+                }else{
+                    throw new Exception();
                 }
-             }
-
-        } catch (SQLException | HeadlessException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        }
+            
+            
+            
+            } catch (SQLException | HeadlessException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }catch (Exception ex){
+                //JOptionPane.showMessageDialog(null, ex);
+                throw ex;
+            }
+            
     }
+        
+    public Administrador buscaAdministrador(Administrador administrador){
+         String sql = "select * from Usuarios where login = ?";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, administrador.getLogin());
+            rs = pst.executeQuery();
+            if(rs.next()){
+                administrador.setNome(rs.getString("Nome"));
+                administrador.setLogin(rs.getString("login"));
+                administrador.setSenha(rs.getString("senha"));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar dados!"+ex);
+        }
+         
+         return administrador;
+     }
 
 
     private void pesquisar() {
@@ -264,7 +286,32 @@ public class Tela_Administrador_Alterar_Dados extends javax.swing.JInternalFrame
     }//GEN-LAST:event_txtNomeAdmActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        alterar_dados_administrador();
+        
+        administrador.setId(Integer.parseInt(Tela_Do_Administrador.txtNumID.getText()));
+        administrador.setNome(txtNomeAdm.getText());
+        administrador.setLogin(txtLoginAdm.getText());
+        administrador.setSenha(txtSenhaAdm.getText());
+        
+        Validar validar = new Validar();
+        boolean nomeValido = validar.checkName(administrador.getNome());
+        boolean senhaValida = validar.checkSenha(administrador.getSenha());
+        boolean nulos = validar.camposNulosAlterarAdm(administrador);
+        
+        if(nulos == true && nomeValido == true && senhaValida == true){
+            try {
+                int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar os Dados do Usuario ", "Atenção", JOptionPane.YES_NO_OPTION);
+
+                if (confirma == JOptionPane.YES_OPTION) {
+                    alterar_dados_Administrador(administrador);
+                    JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!"); 
+                }    
+            } catch (Exception ex) {
+                Logger.getLogger(Tela_Administrador_Alterar_Dados.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Dados inválidos!"); 
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
