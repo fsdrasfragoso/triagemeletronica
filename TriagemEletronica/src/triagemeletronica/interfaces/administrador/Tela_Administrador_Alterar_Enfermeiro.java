@@ -42,14 +42,14 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
         String sql2 = "update Enfermeiro set Telefone_Fixo=?,Telefone_Celular=?,Endereco=? where id=?";
 
         
-         int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar esse Contato", "Atenção", JOptionPane.YES_NO_OPTION);
-
-        if (confirma == JOptionPane.YES_OPTION) {
+         
         
             Validar validar = new Validar();
-            boolean nulos = validar.camposNulosEnfEnd(enfermeiro);
+            boolean nulosEnd = validar.camposNulosEnfEnd(enfermeiro);
             boolean fone10Digitos = validar.checkFone_FixoEnf10DigitosOuNulo(enfermeiro.getFone_fixo());
+            boolean fone_fixoValido = validar.checkFone_FixoEnf_valido(enfermeiro.getFone_fixo());
             boolean celular11Digitos = validar.checkCelularEnf11Digitos(enfermeiro.getFone_celular());
+            boolean celularValido = validar.checkCelularEnf_valido(enfermeiro.getFone_celular());
         
             try {
             
@@ -59,12 +59,12 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
                 pst2.setString(3, enfermeiro.getEndereco()); 
                 pst2.setInt(4, enfermeiro.getId());
             
-                if(nulos == true && fone10Digitos == true && celular11Digitos == true){
+                if(nulosEnd == true && fone10Digitos == true && fone_fixoValido == false && celular11Digitos == true && celularValido == false){
                     pst2.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Dados do enfermeiro alterados com sucesso!"); 
+                    //JOptionPane.showMessageDialog(null, "Dados do enfermeiro alterados com sucesso!"); 
             
                 }else{
-                    throw new Exception("Erro ao alterar dados do enfermeiro!");
+                    throw new Exception();
                 }
             
             
@@ -72,11 +72,10 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
             } catch (SQLException | HeadlessException e) {
                 JOptionPane.showMessageDialog(null, e);
             }catch (Exception ex){
-                JOptionPane.showMessageDialog(null, ex);
+                //JOptionPane.showMessageDialog(null, ex);
                 throw ex;
             }
         
-        }
     }
         
     public Enfermeiro buscaEndEnfermeiro(Enfermeiro enfermeiro){
@@ -352,11 +351,27 @@ public class Tela_Administrador_Alterar_Enfermeiro extends javax.swing.JInternal
         enfermeiro.setFone_fixo(txtTelFixEnf.getText());
         enfermeiro.setFone_celular(txtTelCelEnf1.getText());
         enfermeiro.setEndereco(txtEndEnf.getText());
-        try {
-            alterar_endereco(enfermeiro);
-        } catch (Exception ex) {
-            Logger.getLogger(Tela_Administrador_Alterar_Enfermeiro.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        Validar validar = new Validar();
+        boolean nulosEnd = validar.camposNulosEnfEnd(enfermeiro);
+        boolean fone10Digitos = validar.checkFone_FixoEnf10DigitosOuNulo(txtTelFixEnf.getText());
+        boolean fone_fixoValido = validar.checkFone_FixoEnf_valido(txtTelFixEnf.getText());
+        boolean celular11Digitos = validar.checkCelularEnf11Digitos(txtTelCelEnf1.getText());
+        boolean celularValido = validar.checkCelularEnf_valido(txtTelCelEnf1.getText());
+        
+        if(nulosEnd == true && fone10Digitos == true && fone_fixoValido == false && celular11Digitos == true && celularValido == false) {
+            try {
+                int confirma = JOptionPane.showConfirmDialog(null, "Tem Certeza que deseja Alterar esse Contato", "Atenção", JOptionPane.YES_NO_OPTION);
+                if (confirma == JOptionPane.YES_OPTION) {
+                    alterar_endereco(enfermeiro);
+                    JOptionPane.showMessageDialog(null, "Dados alterados com sucesso!");
+                }        
+            } catch (Exception ex) {
+                Logger.getLogger(Tela_Administrador_Adicionar_Enfermeiro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao alterar dados");
+        } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

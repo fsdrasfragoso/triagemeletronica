@@ -84,6 +84,7 @@ public class Tela_Administrador_Adicionar_Enfermeiro extends javax.swing.JIntern
             pst.setString(1, enfermeiro.getCoren());
             rs = pst.executeQuery();
             if(rs.next()){
+                enfermeiro.setId(rs.getInt("Id"));
                 enfermeiro.setNome(rs.getString("Nome"));
                 enfermeiro.setCoren(rs.getString("login"));
                 enfermeiro.setSenha(rs.getString("senha"));
